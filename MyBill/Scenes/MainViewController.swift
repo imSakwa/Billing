@@ -6,13 +6,21 @@
 //
 
 import UIKit
+import SnapKit
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
 
+    private lazy var billCollectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        
+        return collectionView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .systemOrange
+        self.view.backgroundColor = .secondarySystemBackground
     }
 
 
