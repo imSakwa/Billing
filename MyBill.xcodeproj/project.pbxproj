@@ -16,6 +16,8 @@
 		7682A9FC288EE340008A1A50 /* MyBillUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7682A9FB288EE340008A1A50 /* MyBillUITests.swift */; };
 		7682A9FE288EE340008A1A50 /* MyBillUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7682A9FD288EE340008A1A50 /* MyBillUITestsLaunchTests.swift */; };
 		7682AA10288EE690008A1A50 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7682AA0F288EE690008A1A50 /* SnapKit */; };
+		76FF08392896C42100633CE6 /* BillInfoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FF08382896C42100633CE6 /* BillInfoCollectionCell.swift */; };
+		76FF083B2896C43100633CE6 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FF083A2896C43100633CE6 /* Bill.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		7682A9F7288EE340008A1A50 /* MyBillUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyBillUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7682A9FB288EE340008A1A50 /* MyBillUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBillUITests.swift; sourceTree = "<group>"; };
 		7682A9FD288EE340008A1A50 /* MyBillUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBillUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		76FF08382896C42100633CE6 /* BillInfoCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillInfoCollectionCell.swift; sourceTree = "<group>"; };
+		76FF083A2896C43100633CE6 /* Bill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,7 @@
 				7682A9DA288EE33F008A1A50 /* AppDelegate.swift */,
 				7682A9DC288EE33F008A1A50 /* SceneDelegate.swift */,
 				7682AA0B288EE4D0008A1A50 /* Resources */,
+				76FF083C2896C43900633CE6 /* Model */,
 				7682AA0A288EE4A1008A1A50 /* Scenes */,
 				7682AA0D288EE4E1008A1A50 /* Supporting Files */,
 				7682A9E5288EE340008A1A50 /* LaunchScreen.storyboard */,
@@ -130,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				7682A9DE288EE33F008A1A50 /* MainViewController.swift */,
+				76FF08382896C42100633CE6 /* BillInfoCollectionCell.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -148,6 +154,14 @@
 				7682A9E8288EE340008A1A50 /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		76FF083C2896C43900633CE6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				76FF083A2896C43100633CE6 /* Bill.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,7 +301,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7682A9DF288EE33F008A1A50 /* MainViewController.swift in Sources */,
+				76FF083B2896C43100633CE6 /* Bill.swift in Sources */,
 				7682A9DB288EE33F008A1A50 /* AppDelegate.swift in Sources */,
+				76FF08392896C42100633CE6 /* BillInfoCollectionCell.swift in Sources */,
 				7682A9DD288EE33F008A1A50 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
