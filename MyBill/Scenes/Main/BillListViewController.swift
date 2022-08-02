@@ -8,8 +8,9 @@
 import UIKit
 import SnapKit
 
-final class MainViewController: UIViewController {
-
+final class BillListViewController: UIViewController {
+    private lazy var presenter = BillListPresenter(viewController: self)
+    
     private lazy var billCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
@@ -19,10 +20,20 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.backgroundColor = .secondarySystemBackground
+        presenter.viewDidLoad()
     }
-
-
 }
 
+extension BillListViewController: BillListProtocol {
+    func setupNavigationBar() {
+        view.backgroundColor = .secondarySystemBackground
+    }
+    
+    func setupLayout() {
+        
+    }
+}
+
+private extension BillListViewController {
+    
+}

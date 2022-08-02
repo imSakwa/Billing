@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		7682A9DB288EE33F008A1A50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7682A9DA288EE33F008A1A50 /* AppDelegate.swift */; };
 		7682A9DD288EE33F008A1A50 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7682A9DC288EE33F008A1A50 /* SceneDelegate.swift */; };
-		7682A9DF288EE33F008A1A50 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7682A9DE288EE33F008A1A50 /* MainViewController.swift */; };
+		7682A9DF288EE33F008A1A50 /* BillListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7682A9DE288EE33F008A1A50 /* BillListViewController.swift */; };
 		7682A9E4288EE340008A1A50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7682A9E3288EE340008A1A50 /* Assets.xcassets */; };
 		7682A9E7288EE340008A1A50 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7682A9E5288EE340008A1A50 /* LaunchScreen.storyboard */; };
 		7682A9F2288EE340008A1A50 /* MyBillTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7682A9F1288EE340008A1A50 /* MyBillTests.swift */; };
@@ -20,6 +20,7 @@
 		76FF083B2896C43100633CE6 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FF083A2896C43100633CE6 /* Bill.swift */; };
 		76FF08402899703200633CE6 /* MonthlyGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FF083F2899703200633CE6 /* MonthlyGoalViewController.swift */; };
 		76FF08422899707B00633CE6 /* MonthlyGoalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FF08412899707B00633CE6 /* MonthlyGoalPresenter.swift */; };
+		76FF0844289972A100633CE6 /* BillListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FF0843289972A100633CE6 /* BillListPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +44,7 @@
 		7682A9D7288EE33F008A1A50 /* MyBill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7682A9DA288EE33F008A1A50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7682A9DC288EE33F008A1A50 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7682A9DE288EE33F008A1A50 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		7682A9DE288EE33F008A1A50 /* BillListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillListViewController.swift; sourceTree = "<group>"; };
 		7682A9E3288EE340008A1A50 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7682A9E6288EE340008A1A50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7682A9E8288EE340008A1A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,6 +57,7 @@
 		76FF083A2896C43100633CE6 /* Bill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
 		76FF083F2899703200633CE6 /* MonthlyGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyGoalViewController.swift; sourceTree = "<group>"; };
 		76FF08412899707B00633CE6 /* MonthlyGoalPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyGoalPresenter.swift; sourceTree = "<group>"; };
+		76FF0843289972A100633CE6 /* BillListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillListPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,7 +173,8 @@
 		76FF083D28996F6B00633CE6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				7682A9DE288EE33F008A1A50 /* MainViewController.swift */,
+				7682A9DE288EE33F008A1A50 /* BillListViewController.swift */,
+				76FF0843289972A100633CE6 /* BillListPresenter.swift */,
 				76FF08382896C42100633CE6 /* BillInfoCollectionCell.swift */,
 			);
 			path = Main;
@@ -322,7 +325,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7682A9DF288EE33F008A1A50 /* MainViewController.swift in Sources */,
+				7682A9DF288EE33F008A1A50 /* BillListViewController.swift in Sources */,
+				76FF0844289972A100633CE6 /* BillListPresenter.swift in Sources */,
 				76FF083B2896C43100633CE6 /* Bill.swift in Sources */,
 				76FF08402899703200633CE6 /* MonthlyGoalViewController.swift in Sources */,
 				7682A9DB288EE33F008A1A50 /* AppDelegate.swift in Sources */,
