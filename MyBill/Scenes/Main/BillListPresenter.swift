@@ -57,7 +57,7 @@ extension BillListPresenter: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumLineSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return 50
+        return 35
     }
 }
 
