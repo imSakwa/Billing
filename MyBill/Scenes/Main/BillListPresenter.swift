@@ -61,3 +61,13 @@ extension BillListPresenter: UICollectionViewDelegateFlowLayout {
     }
 }
 
+extension BillListPresenter: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y < 0 {
+            // 네비게이션 뷰 넓어져야함
+            
+        } else if scrollView.contentOffset.y > 0 {
+            // 네비게이션 뷰 좁아져야함
+        }
+    }
+}

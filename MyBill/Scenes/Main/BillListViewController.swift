@@ -13,8 +13,18 @@ final class BillListViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Int ,Bill>!
     private var billList: [Bill] = [
         Bill(title: "첫번째", cost: 1000, memo: "메모", date: "없음"),
-        Bill(title: "두번째", cost: 1000, memo: "메모", date: "없음")
+        Bill(title: "두번째", cost: 1000, memo: "메모", date: "없음"),
+        Bill(title: "세번째", cost: 1000, memo: "메모", date: "없음"),
+        Bill(title: "네번째", cost: 1000, memo: "메모", date: "없음"),
+        Bill(title: "오번째", cost: 1000, memo: "메모", date: "없음"),
+        Bill(title: "육번째", cost: 1000, memo: "메모", date: "없음")
     ]
+    
+    private lazy var navigationView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .blue
+        return view
+    }()
     
     private lazy var billCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -33,14 +43,23 @@ final class BillListViewController: UIViewController {
 
 extension BillListViewController: BillListProtocol {
     func setupNavigationBar() {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+         
         view.backgroundColor = .secondarySystemBackground
     }
     
     func setupLayout() {
-        view.addSubview(billCollectionView)
+        [navigationView, billCollectionView].forEach { view.addSubview($0) }
+        
+        navigationView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalToSuperview().dividedBy(3.5)
+        }
         
         billCollectionView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalTo(navigationView.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
     
