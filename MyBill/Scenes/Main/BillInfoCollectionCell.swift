@@ -9,10 +9,10 @@ import UIKit
 import SnapKit
 
 final class BillInfoCollectionCell: UICollectionViewCell {
+    static let identifier = "BillInfoCell"
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "제목"
         return label
     }()
     
@@ -43,6 +43,9 @@ final class BillInfoCollectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setupCell(bill: Bill) {
+        titleLabel.text = bill.title
+    }
 }
 
 private extension BillInfoCollectionCell {
