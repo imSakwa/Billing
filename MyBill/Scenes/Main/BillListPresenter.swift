@@ -59,14 +59,19 @@ extension BillListPresenter: UICollectionViewDelegateFlowLayout {
     ) -> CGFloat {
         return 35
     }
+    
+    // 헤더 크기
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let width = UIScreen.main.bounds.width - 32
+        let height = UIScreen.main.bounds.height
+        return CGSize(width: width, height: height / 3.5)
+    }
 }
 
 extension BillListPresenter: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y < 0 {
-            // 네비게이션 뷰 넓어져야함
-            
-        } else if scrollView.contentOffset.y > 0 {
+        if scrollView.contentOffset.y > 0 && scrollView.contentOffset.y < 150 {
+            print(scrollView.contentOffset.y)
             // 네비게이션 뷰 좁아져야함
         }
     }

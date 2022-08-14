@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		760AE99528A8E325006703B6 /* BillInfoCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760AE99428A8E325006703B6 /* BillInfoCollectionHeaderView.swift */; };
 		7682A9DB288EE33F008A1A50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7682A9DA288EE33F008A1A50 /* AppDelegate.swift */; };
 		7682A9DD288EE33F008A1A50 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7682A9DC288EE33F008A1A50 /* SceneDelegate.swift */; };
 		7682A9DF288EE33F008A1A50 /* BillListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7682A9DE288EE33F008A1A50 /* BillListViewController.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		760AE99428A8E325006703B6 /* BillInfoCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillInfoCollectionHeaderView.swift; sourceTree = "<group>"; };
 		7682A9D7288EE33F008A1A50 /* MyBill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7682A9DA288EE33F008A1A50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7682A9DC288EE33F008A1A50 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			children = (
 				7682A9DE288EE33F008A1A50 /* BillListViewController.swift */,
 				76FF0843289972A100633CE6 /* BillListPresenter.swift */,
+				760AE99428A8E325006703B6 /* BillInfoCollectionHeaderView.swift */,
 				76FF08382896C42100633CE6 /* BillInfoCollectionCell.swift */,
 			);
 			path = Main;
@@ -325,6 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				760AE99528A8E325006703B6 /* BillInfoCollectionHeaderView.swift in Sources */,
 				7682A9DF288EE33F008A1A50 /* BillListViewController.swift in Sources */,
 				76FF0844289972A100633CE6 /* BillListPresenter.swift in Sources */,
 				76FF083B2896C43100633CE6 /* Bill.swift in Sources */,

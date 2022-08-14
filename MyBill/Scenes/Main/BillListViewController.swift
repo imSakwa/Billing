@@ -19,19 +19,22 @@ final class BillListViewController: UIViewController {
         Bill(title: "오번째", cost: 1000, memo: "메모", date: "없음"),
         Bill(title: "육번째", cost: 1000, memo: "메모", date: "없음")
     ]
-    
-    private lazy var navigationView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .blue
-        return view
+        
+    private lazy var billCollectionHeaderView: BillInfoCollectionHeaderView = {
+        let reusableView = BillInfoCollectionHeaderView()
+        return reusableView
     }()
     
     private lazy var billCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.sectionHeadersPinToVisibleBounds = false
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.delegate = presenter
         collectionView.dataSource = dataSource
         collectionView.register(BillInfoCollectionCell.self, forCellWithReuseIdentifier: BillInfoCollectionCell.identifier)
+        collectionView.register(BillInfoCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: BillInfoCollectionHeaderView.identifier)
+        collectionView.backgroundColor = .yellow
         return collectionView
     }()
     
@@ -49,16 +52,10 @@ extension BillListViewController: BillListProtocol {
     }
     
     func setupLayout() {
-        [navigationView, billCollectionView].forEach { view.addSubview($0) }
-        
-        navigationView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalToSuperview().dividedBy(3.5)
-        }
-        
+        [billCollectionView].forEach { view.addSubview($0) }
+                
         billCollectionView.snp.makeConstraints {
-            $0.top.equalTo(navigationView.snp.bottom)
+            $0.top.equalToSuperview()
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
@@ -71,6 +68,19 @@ extension BillListViewController: BillListProtocol {
             cell.setupCell(bill: (self?.billList[indexPath.row])!)
             return cell
         }
+        
+        dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) in
+            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
+                ofKind: UICollectionView.elementKindSectionHeader,
+                withReuseIdentifier: BillInfoCollectionHeaderView.identifier,
+                for: indexPath
+            ) as? BillInfoCollectionHeaderView else {
+                fatalError("Could not dequeue sectionHeader: \(BillInfoCollectionHeaderView.identifier)")
+            }
+
+            sectionHeader.backgroundColor = .green
+            return sectionHeader
+         }
     }
     
     func configureSnapShot() {
