@@ -20,10 +20,10 @@ final class BillListViewController: UIViewController {
         Bill(title: "육번째", cost: 1000, memo: "메모", date: "없음")
     ]
         
-    private lazy var billCollectionHeaderView: BillInfoCollectionHeaderView = {
-        let reusableView = BillInfoCollectionHeaderView()
-        return reusableView
-    }()
+//    private lazy var billCollectionHeaderView: BillInfoCollectionHeaderView = {
+//        let reusableView = BillInfoCollectionHeaderView(delegate: self)
+//        return reusableView
+//    }()
     
     private lazy var billCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -77,6 +77,7 @@ extension BillListViewController: BillListProtocol {
             ) as? BillInfoCollectionHeaderView else {
                 fatalError("Could not dequeue sectionHeader: \(BillInfoCollectionHeaderView.identifier)")
             }
+            sectionHeader.delegate = self
 
             sectionHeader.backgroundColor = .green
             return sectionHeader
@@ -99,4 +100,10 @@ extension BillListViewController: BillListProtocol {
 
 private extension BillListViewController {
     
+}
+
+extension BillListViewController: BillInfoHeaderDelegate {
+    func tapSettingButton() {
+        print("tap Setting Btn")
+    }
 }
