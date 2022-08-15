@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		760AE99528A8E325006703B6 /* BillInfoCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760AE99428A8E325006703B6 /* BillInfoCollectionHeaderView.swift */; };
+		760AE99728AA337C006703B6 /* CustomCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760AE99628AA337C006703B6 /* CustomCollectionViewFlowLayout.swift */; };
+		760AE99A28AA35E9006703B6 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 760AE99928AA35E9006703B6 /* Colors.xcassets */; };
+		760AE99C28AA374E006703B6 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760AE99B28AA374E006703B6 /* ColorExtension.swift */; };
 		7682A9DB288EE33F008A1A50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7682A9DA288EE33F008A1A50 /* AppDelegate.swift */; };
 		7682A9DD288EE33F008A1A50 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7682A9DC288EE33F008A1A50 /* SceneDelegate.swift */; };
 		7682A9DF288EE33F008A1A50 /* BillListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7682A9DE288EE33F008A1A50 /* BillListViewController.swift */; };
@@ -43,6 +46,9 @@
 
 /* Begin PBXFileReference section */
 		760AE99428A8E325006703B6 /* BillInfoCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillInfoCollectionHeaderView.swift; sourceTree = "<group>"; };
+		760AE99628AA337C006703B6 /* CustomCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		760AE99928AA35E9006703B6 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		760AE99B28AA374E006703B6 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		7682A9D7288EE33F008A1A50 /* MyBill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7682A9DA288EE33F008A1A50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7682A9DC288EE33F008A1A50 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +94,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		760AE99828AA3381006703B6 /* BillInfoCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				76FF08382896C42100633CE6 /* BillInfoCollectionCell.swift */,
+				760AE99428A8E325006703B6 /* BillInfoCollectionHeaderView.swift */,
+				760AE99628AA337C006703B6 /* CustomCollectionViewFlowLayout.swift */,
+			);
+			path = BillInfoCollectionView;
+			sourceTree = "<group>";
+		};
 		7682A9CE288EE33F008A1A50 = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +168,8 @@
 			isa = PBXGroup;
 			children = (
 				7682A9E3288EE340008A1A50 /* Assets.xcassets */,
+				760AE99928AA35E9006703B6 /* Colors.xcassets */,
+				760AE99B28AA374E006703B6 /* ColorExtension.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -177,8 +195,7 @@
 			children = (
 				7682A9DE288EE33F008A1A50 /* BillListViewController.swift */,
 				76FF0843289972A100633CE6 /* BillListPresenter.swift */,
-				760AE99428A8E325006703B6 /* BillInfoCollectionHeaderView.swift */,
-				76FF08382896C42100633CE6 /* BillInfoCollectionCell.swift */,
+				760AE99828AA3381006703B6 /* BillInfoCollectionView */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -302,6 +319,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				760AE99A28AA35E9006703B6 /* Colors.xcassets in Resources */,
 				7682A9E7288EE340008A1A50 /* LaunchScreen.storyboard in Resources */,
 				7682A9E4288EE340008A1A50 /* Assets.xcassets in Resources */,
 			);
@@ -331,11 +349,13 @@
 				760AE99528A8E325006703B6 /* BillInfoCollectionHeaderView.swift in Sources */,
 				7682A9DF288EE33F008A1A50 /* BillListViewController.swift in Sources */,
 				76FF0844289972A100633CE6 /* BillListPresenter.swift in Sources */,
+				760AE99728AA337C006703B6 /* CustomCollectionViewFlowLayout.swift in Sources */,
 				76FF083B2896C43100633CE6 /* Bill.swift in Sources */,
 				76FF08402899703200633CE6 /* MonthlyGoalViewController.swift in Sources */,
 				7682A9DB288EE33F008A1A50 /* AppDelegate.swift in Sources */,
 				76FF08422899707B00633CE6 /* MonthlyGoalPresenter.swift in Sources */,
 				76FF08392896C42100633CE6 /* BillInfoCollectionCell.swift in Sources */,
+				760AE99C28AA374E006703B6 /* ColorExtension.swift in Sources */,
 				7682A9DD288EE33F008A1A50 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

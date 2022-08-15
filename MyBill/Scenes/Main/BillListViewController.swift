@@ -103,6 +103,10 @@ extension BillListViewController: BillInfoHeaderDelegate {
     func tapSettingButton() {
         let goalVC = MonthlyGoalViewController()
         
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = .darkGray
+        self.navigationItem.backBarButtonItem = backBarButtonItem
+        
         self.navigationController?.pushViewController(goalVC, animated: true)
     }
 }

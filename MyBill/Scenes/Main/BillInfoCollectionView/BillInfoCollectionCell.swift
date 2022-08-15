@@ -14,6 +14,7 @@ final class BillInfoCollectionCell: UICollectionViewCell {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 22)
+        label.textColor = .textColor
         return label
     }()
     
@@ -21,12 +22,14 @@ final class BillInfoCollectionCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "금액: "
         label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.textColor = .textColor
         return label
     }()
     
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.textColor = .textColor
         return label
     }()
     
@@ -34,6 +37,7 @@ final class BillInfoCollectionCell: UICollectionViewCell {
         let textView = UITextView()
         textView.backgroundColor = .clear
         textView.font = .systemFont(ofSize: 16, weight: .regular)
+        textView.textColor = .textColor
         
         return textView
     }()

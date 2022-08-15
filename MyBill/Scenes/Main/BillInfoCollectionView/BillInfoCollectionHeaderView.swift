@@ -18,8 +18,9 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
     
     private lazy var settingButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "icon_goal"), for: .normal)
+        button.setImage(UIImage(named: "icon_goal")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.addTarget(self, action: #selector(tapSettingButton), for: .touchUpInside)
+        button.tintColor = .buttonColor
         return button
     }()
     
@@ -27,6 +28,7 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
         let label = UILabel()
         label.text = "김김김김"
         label.font = .systemFont(ofSize: 28, weight: .medium)
+        label.textColor = .textColor
         return label
     }()
     
@@ -34,6 +36,7 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
         let label = UILabel()
         label.text = "?? : 000,000?"
         label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.textColor = .textColor
         return label
     }()
     
@@ -42,6 +45,7 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
         let label = UILabel()
         label.text = "파이팅🔥"
         label.font = .systemFont(ofSize: 20, weight: .medium)
+        label.textColor = .textColor
         return label
     }()
    
