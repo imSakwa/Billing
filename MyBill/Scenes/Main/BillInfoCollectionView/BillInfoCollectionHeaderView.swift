@@ -16,7 +16,7 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
     static let identifier = "BillInfoHeaderView"
     var delegate: BillInfoHeaderDelegate?
     
-    private lazy var settingButton: UIButton = {
+    private lazy var goalButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "icon_goal")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.addTarget(self, action: #selector(tapSettingButton), for: .touchUpInside)
@@ -62,7 +62,7 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
 
 private extension BillInfoCollectionHeaderView {
     func setupLayout() {
-        [nameLabel, balanceLabel, conditionLabel, settingButton].forEach { self.addSubview($0) }
+        [nameLabel, balanceLabel, conditionLabel, goalButton].forEach { self.addSubview($0) }
         
         nameLabel.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide).offset(40)
@@ -79,7 +79,7 @@ private extension BillInfoCollectionHeaderView {
             $0.top.equalTo(balanceLabel.snp.bottom).offset(8)
         }
         
-        settingButton.snp.makeConstraints {
+        goalButton.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide).offset(16)
             $0.trailing.equalToSuperview().inset(16)
             $0.size.equalTo(24)

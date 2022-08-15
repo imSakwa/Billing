@@ -104,7 +104,7 @@ extension BillListViewController: BillInfoHeaderDelegate {
         let goalVC = MonthlyGoalViewController()
         
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        backBarButtonItem.tintColor = .darkGray
+        backBarButtonItem.tintColor = .buttonColor
         self.navigationItem.backBarButtonItem = backBarButtonItem
         
         self.navigationController?.pushViewController(goalVC, animated: true)
