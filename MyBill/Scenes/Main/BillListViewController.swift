@@ -20,14 +20,10 @@ final class BillListViewController: UIViewController {
         Bill(title: "육번째", cost: 1000, memo: "메모", date: "없음")
     ]
         
-//    private lazy var billCollectionHeaderView: BillInfoCollectionHeaderView = {
-//        let reusableView = BillInfoCollectionHeaderView(delegate: self)
-//        return reusableView
-//    }()
-    
     private lazy var billCollectionView: UICollectionView = {
-        let flowLayout = UICollectionViewFlowLayout()
+        let flowLayout = CustomCollectionViewFlowLayout()
         flowLayout.sectionHeadersPinToVisibleBounds = false
+        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.delegate = presenter
@@ -42,6 +38,7 @@ final class BillListViewController: UIViewController {
         super.viewDidLoad()
         presenter.viewDidLoad()
     }
+    
 }
 
 extension BillListViewController: BillListProtocol {
@@ -55,7 +52,7 @@ extension BillListViewController: BillListProtocol {
         [billCollectionView].forEach { view.addSubview($0) }
                 
         billCollectionView.snp.makeConstraints {
-            $0.top.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
@@ -104,6 +101,8 @@ private extension BillListViewController {
 
 extension BillListViewController: BillInfoHeaderDelegate {
     func tapSettingButton() {
-        print("tap Setting Btn")
+        let goalVC = MonthlyGoalViewController()
+        
+        self.navigationController?.pushViewController(goalVC, animated: true)
     }
 }
