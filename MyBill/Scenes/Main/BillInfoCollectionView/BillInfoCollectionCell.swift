@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class BillInfoCollectionCell: UICollectionViewCell {
-    static let identifier = "BillInfoCell"
+    static let identifier = String(describing: BillInfoCollectionCell.self)
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
