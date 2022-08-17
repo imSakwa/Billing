@@ -17,6 +17,12 @@ final class MonthlyGoalViewController: UIViewController {
         return barButton
     }()
     
+    private lazy var nameView: SettingBoxView = {
+        let view = SettingBoxView()
+        
+        return view
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +46,13 @@ extension MonthlyGoalViewController: MonthlyGoalProtocol {
     }
     
     func setupLayout() {
+        [nameView].forEach { view.addSubview($0) }
         
+        nameView.snp.makeConstraints {
+            $0.centerX.centerY.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.height.equalTo(80)
+        }
     }
 }
 
