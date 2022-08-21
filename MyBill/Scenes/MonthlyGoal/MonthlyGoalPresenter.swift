@@ -9,6 +9,7 @@ import Foundation
 
 protocol MonthlyGoalProtocol: AnyObject {
     func setupNavigationBar()
+    func setupObserver()
     func setupLayout()
 }
 
@@ -22,6 +23,7 @@ final class MonthlyGoalPresenter: NSObject {
     
     func viewDidLoad() {
         viewController?.setupNavigationBar()
+        viewController?.setupObserver()
         viewController?.setupLayout()
     }
 }
