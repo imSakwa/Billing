@@ -48,7 +48,11 @@ extension MonthlyGoalViewController: MonthlyGoalProtocol {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         self.navigationItem.rightBarButtonItem = settingButton
-        
+    }
+    
+    func setupObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     func setupLayout() {
@@ -67,5 +71,27 @@ extension MonthlyGoalViewController: MonthlyGoalProtocol {
 }
 
 private extension MonthlyGoalViewController {
+    @objc func keyboardWillShow() {
+        self.view.frame.origin.y -= 150
+    }
     
+    @objc func keyboardWillHide() {
+        self.view.frame.origin.y = 0
+    }
+}
+
+extension MonthlyGoalViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == goalPriceView.inputTextField {
+            guard let value = textField.text, Int(value) == 0 else { return }
+            
+            // TODO: 0인 경우에 alert 창 띄우기
+            print("0")
+            
+        }
+    }
 }
