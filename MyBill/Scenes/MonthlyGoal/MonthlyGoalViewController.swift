@@ -52,6 +52,12 @@ final class MonthlyGoalViewController: UIViewController {
         return view
     }()
     
+    private lazy var memoView: SettingBoxView = {
+        let view = SettingBoxView(title: "메모(최대 30자)", boxType: .text)
+        view.inputTextField.delegate = self
+        return view
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,11 +112,11 @@ extension MonthlyGoalViewController: MonthlyGoalProtocol {
 
 private extension MonthlyGoalViewController {
     @objc func keyboardWillShow() {
-        self.view.frame.origin.y -= 100
+//        self.view.frame.origin.y -= 100
     }
     
     @objc func keyboardWillHide() {
-        self.view.frame.origin.y = 0
+//        self.view.frame.origin.y = 0
     }
 }
 
@@ -126,6 +132,10 @@ extension MonthlyGoalViewController: UITextFieldDelegate {
             // TODO: 0인 경우에 alert 창 띄우기
             print("0")
             
+        }
+        
+        if textField == nameView.inputTextField {
+            textField.checkMaxLength(textField: textField, maxLength: 10)
         }
     }
 }

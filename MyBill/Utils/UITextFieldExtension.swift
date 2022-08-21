@@ -27,4 +27,10 @@ extension UITextField {
    @objc func doneButtonAction() {
        self.resignFirstResponder()
    }
+    
+    func checkMaxLength(textField: UITextField!, maxLength: Int) {
+        if (textField.text?.count ?? 0 > maxLength) {
+            textField.deleteBackward()
+        }
+    }
 }
