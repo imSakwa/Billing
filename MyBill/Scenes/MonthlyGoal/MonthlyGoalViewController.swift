@@ -17,6 +17,29 @@ final class MonthlyGoalViewController: UIViewController {
         return barButton
     }()
     
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.text = "나만의 목표 금액 설정"
+        return label
+    }()
+    
+    private let descriptionTextView: UITextView = {
+        let textView = UITextView()
+        textView.font = .systemFont(ofSize: 16, weight: .medium)
+        textView.isEditable = false
+        textView.text =
+            """
+            매달 자신의 목표 금액을 입력 해봐요!
+            간단한 메모를 통해서 스스로에게 응원도 해봐요!
+            
+            닉네임은 매번 수정 가능하지만
+            목표액은 매월 1일에 가능합니다👍
+            """
+        textView.sizeToFit()
+        return textView
+    }()
+    
     private lazy var nameView: SettingBoxView = {
         let view = SettingBoxView(title: "닉네임", boxType: .text)
         view.inputTextField.delegate = self
@@ -56,23 +79,34 @@ extension MonthlyGoalViewController: MonthlyGoalProtocol {
     }
     
     func setupLayout() {
-        [nameView, goalPriceView].forEach { view.addSubview($0) }
+        [titleLabel, descriptionTextView,nameView, goalPriceView].forEach { view.addSubview($0) }
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(36)
+            $0.leading.trailing.equalToSuperview().inset(24)
+        }
+        
+        descriptionTextView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(8)
+            $0.leading.trailing.equalTo(titleLabel)
+            $0.height.equalTo(120)
+        }
         
         nameView.snp.makeConstraints {
-            $0.centerX.centerY.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.top.equalTo(descriptionTextView.snp.bottom).offset(16)
+            $0.leading.trailing.equalTo(titleLabel)
         }
         
         goalPriceView.snp.makeConstraints {
             $0.top.equalTo(nameView.snp.bottom).offset(24)
-            $0.leading.trailing.equalTo(nameView)
+            $0.leading.trailing.equalTo(titleLabel)
         }
     }
 }
 
 private extension MonthlyGoalViewController {
     @objc func keyboardWillShow() {
-        self.view.frame.origin.y -= 150
+        self.view.frame.origin.y -= 100
     }
     
     @objc func keyboardWillHide() {
