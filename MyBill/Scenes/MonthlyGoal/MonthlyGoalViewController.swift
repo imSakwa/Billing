@@ -59,6 +59,16 @@ final class MonthlyGoalViewController: UIViewController {
     }()
     
     
+    private lazy var enterButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("완료", for: .normal)
+        button.backgroundColor = .secondarySystemBackground
+        button.layer.borderColor = UIColor.systemGray.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 10
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
@@ -85,7 +95,7 @@ extension MonthlyGoalViewController: MonthlyGoalProtocol {
     }
     
     func setupLayout() {
-        [titleLabel, descriptionTextView,nameView, goalPriceView].forEach { view.addSubview($0) }
+        [titleLabel, descriptionTextView,nameView, goalPriceView, enterButton].forEach { view.addSubview($0) }
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(36)
@@ -105,6 +115,11 @@ extension MonthlyGoalViewController: MonthlyGoalProtocol {
         
         goalPriceView.snp.makeConstraints {
             $0.top.equalTo(nameView.snp.bottom).offset(24)
+            $0.leading.trailing.equalTo(titleLabel)
+        }
+        
+        enterButton.snp.makeConstraints {
+            $0.top.equalTo(goalPriceView.snp.bottom).offset(24)
             $0.leading.trailing.equalTo(titleLabel)
         }
     }
