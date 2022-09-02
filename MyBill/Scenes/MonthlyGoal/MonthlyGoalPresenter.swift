@@ -11,6 +11,7 @@ protocol MonthlyGoalProtocol: AnyObject {
     func setupNavigationBar()
     func setupObserver()
     func setupLayout()
+    func setMyGoal()
 }
 
 final class MonthlyGoalPresenter: NSObject {
@@ -25,5 +26,9 @@ final class MonthlyGoalPresenter: NSObject {
         viewController?.setupNavigationBar()
         viewController?.setupObserver()
         viewController?.setupLayout()
+    }
+    
+    func tapEnterButton() {
+        viewController?.setMyGoal()
     }
 }

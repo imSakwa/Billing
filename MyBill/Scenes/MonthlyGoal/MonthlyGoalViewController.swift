@@ -67,6 +67,7 @@ final class MonthlyGoalViewController: UIViewController {
         button.layer.borderColor = UIColor.systemGray.cgColor
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(tapEnterButton), for: .touchUpInside)
         return button
     }()
     
@@ -83,6 +84,12 @@ final class MonthlyGoalViewController: UIViewController {
 }
 
 extension MonthlyGoalViewController: MonthlyGoalProtocol {
+    func setMyGoal() {
+        // TODO: 입력 값 갖고 이전 화면으로 이동
+        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     func setupNavigationBar() {
         view.backgroundColor = .systemBackground
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -133,6 +140,10 @@ private extension MonthlyGoalViewController {
     
     @objc func keyboardWillHide() {
         self.view.frame.origin.y = 0
+    }
+    
+    @objc func tapEnterButton() {
+        presenter.tapEnterButton()
     }
 }
 
