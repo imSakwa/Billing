@@ -93,6 +93,7 @@ extension MonthlyGoalViewController: MonthlyGoalProtocol {
     func setMyGoal() {
         // TODO: 입력 값 갖고 이전 화면으로 이동
         
+        self.checkInputValue()
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -161,6 +162,23 @@ private extension MonthlyGoalViewController {
     @objc func tapViewForHideKeyboard() {
         self.view.endEditing(true)
     }
+    
+    func checkInputValue() {
+        guard let goalPriceValue =  goalPriceView.inputTextField.text, Int(goalPriceValue) == 0 else { return }
+        
+        let alertController = UIAlertController(
+            title: nil,
+            message: "목표 금액을 입력해주세요.",
+            preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default)
+        
+        alertController.addAction(okAction)
+        
+        self.present(alertController, animated: true)
+    }
 }
 
 extension MonthlyGoalViewController: UITextFieldDelegate {
@@ -170,11 +188,8 @@ extension MonthlyGoalViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == goalPriceView.inputTextField {
-            guard let value = textField.text, Int(value) == 0 else { return }
             
-            // TODO: 0인 경우에 alert 창 띄우기
-            print("0")
-            
+            checkInputValue()
         }
         
         if textField == nameView.inputTextField {
