@@ -43,12 +43,14 @@ final class MonthlyGoalViewController: UIViewController {
     private lazy var nameView: SettingBoxView = {
         let view = SettingBoxView(title: "닉네임", boxType: .text)
         view.inputTextField.delegate = self
+        view.inputTextField.inputAccessoryView = textfieldAccessoryView
         return view
     }()
     
     private lazy var goalPriceView: SettingBoxView = {
         let view = SettingBoxView(title: "목표액", boxType: .number)
         view.inputTextField.delegate = self
+        view.inputTextField.inputAccessoryView = textfieldAccessoryView
         return view
     }()
     
@@ -58,6 +60,10 @@ final class MonthlyGoalViewController: UIViewController {
         return view
     }()
     
+    private lazy var textfieldAccessoryView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+        return view
+    }()
     
     private lazy var enterButton: UIButton = {
         let button = UIButton()
@@ -103,7 +109,7 @@ extension MonthlyGoalViewController: MonthlyGoalProtocol {
     }
     
     func setupLayout() {
-        [titleLabel, descriptionTextView,nameView, goalPriceView, enterButton].forEach { view.addSubview($0) }
+        [titleLabel, descriptionTextView,nameView, goalPriceView].forEach { view.addSubview($0) }
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(36)
@@ -126,9 +132,12 @@ extension MonthlyGoalViewController: MonthlyGoalProtocol {
             $0.leading.trailing.equalTo(titleLabel)
         }
         
+        textfieldAccessoryView.addSubview(enterButton)
+        
         enterButton.snp.makeConstraints {
-            $0.top.equalTo(goalPriceView.snp.bottom).offset(24)
-            $0.leading.trailing.equalTo(titleLabel)
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.bottom.equalToSuperview().inset(8)
+            $0.height.equalTo(42)
         }
     }
 }
