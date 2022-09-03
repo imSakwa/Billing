@@ -106,6 +106,9 @@ extension MonthlyGoalViewController: MonthlyGoalProtocol {
     func setupObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapViewForHideKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
     }
     
     func setupLayout() {
@@ -153,6 +156,10 @@ private extension MonthlyGoalViewController {
     
     @objc func tapEnterButton() {
         presenter.tapEnterButton()
+    }
+    
+    @objc func tapViewForHideKeyboard() {
+        self.view.endEditing(true)
     }
 }
 
