@@ -102,6 +102,11 @@ private extension BillListViewController {
 extension BillListViewController: BillInfoHeaderDelegate {
     func tapSettingButton() {
         let goalVC = MonthlyGoalViewController()
+        goalVC.completionHandler = {
+            
+            // TODO: billCollectionView 헤더 갱신해주기
+            
+        }
         
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         backBarButtonItem.tintColor = .buttonColor

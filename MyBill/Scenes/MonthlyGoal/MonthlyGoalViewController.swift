@@ -10,6 +10,7 @@ import UIKit
 
 final class MonthlyGoalViewController: UIViewController {
     private lazy var presenter = MonthlyGoalPresenter(viewController: self)
+    var completionHandler: (() -> Void)?
     
     private lazy var settingButton: UIBarButtonItem = {
         let image = UIImage(named: "gearshape")
@@ -91,9 +92,13 @@ final class MonthlyGoalViewController: UIViewController {
 
 extension MonthlyGoalViewController: MonthlyGoalProtocol {
     func setMyGoal() {
-        // TODO: 입력 값 갖고 이전 화면으로 이동
-        
         self.checkInputValue()
+        
+        UserDefaults.standard.set(nameView.inputTextField.text, forKey: "name")
+        UserDefaults.standard.set(goalPriceView.inputTextField.text, forKey: "balance")
+        
+        completionHandler?()
+        
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -163,6 +168,7 @@ private extension MonthlyGoalViewController {
         self.view.endEditing(true)
     }
     
+    /// 입력 내용 체크 메서드
     func checkInputValue() {
         guard let goalPriceValue =  goalPriceView.inputTextField.text, Int(goalPriceValue) == 0 else { return }
         

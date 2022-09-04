@@ -26,7 +26,7 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "김김김김"
+        label.text = UserDefaults.standard.value(forKey: "name") as? String ?? "닉네임"
         label.font = .systemFont(ofSize: 28, weight: .medium)
         label.textColor = .textColor
         return label
@@ -34,7 +34,7 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
     
     private lazy var balanceLabel: UILabel = {
         let label = UILabel()
-        label.text = "?? : 000,000?"
+        label.text = "목표액 : " + (UserDefaults.standard.value(forKey: "balance") as? String ?? "0") + "원"
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.textColor = .textColor
         return label
