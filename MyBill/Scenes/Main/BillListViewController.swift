@@ -30,7 +30,6 @@ final class BillListViewController: UIViewController {
         collectionView.dataSource = dataSource
         collectionView.register(BillInfoCollectionCell.self, forCellWithReuseIdentifier: BillInfoCollectionCell.identifier)
         collectionView.register(BillInfoCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: BillInfoCollectionHeaderView.identifier)
-        collectionView.backgroundColor = .yellow
         return collectionView
     }()
     
@@ -61,7 +60,8 @@ extension BillListViewController: BillListProtocol {
         dataSource = UICollectionViewDiffableDataSource(collectionView: billCollectionView) { [weak self] collectionView, indexPath, itemIdentifier -> UICollectionViewCell? in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BillInfoCollectionCell.identifier, for: indexPath) as? BillInfoCollectionCell else { return UICollectionViewCell() }
             
-            cell.backgroundColor = .brown
+            cell.layer.borderColor = UIColor.systemGray.cgColor
+            cell.layer.borderWidth = 1
             cell.setupCell(bill: (self?.billList[indexPath.row])!)
             return cell
         }
@@ -75,8 +75,7 @@ extension BillListViewController: BillListProtocol {
                 fatalError("Could not dequeue sectionHeader: \(BillInfoCollectionHeaderView.identifier)")
             }
             sectionHeader.delegate = self
-
-            sectionHeader.backgroundColor = .green
+            sectionHeader.backgroundColor = .secondarySystemBackground
             return sectionHeader
          }
     }
