@@ -30,6 +30,7 @@ final class BillListViewController: UIViewController {
         collectionView.dataSource = dataSource
         collectionView.register(BillInfoCollectionCell.self, forCellWithReuseIdentifier: BillInfoCollectionCell.identifier)
         collectionView.register(BillInfoCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: BillInfoCollectionHeaderView.identifier)
+        collectionView.backgroundColor = .systemGray6
         return collectionView
     }()
     
@@ -44,7 +45,7 @@ extension BillListViewController: BillListProtocol {
     func setupNavigationBar() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
          
-        view.backgroundColor = .secondarySystemBackground
+        view.backgroundColor = .systemGray6
     }
     
     func setupLayout() {
@@ -60,6 +61,7 @@ extension BillListViewController: BillListProtocol {
         dataSource = UICollectionViewDiffableDataSource(collectionView: billCollectionView) { [weak self] collectionView, indexPath, itemIdentifier -> UICollectionViewCell? in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BillInfoCollectionCell.identifier, for: indexPath) as? BillInfoCollectionCell else { return UICollectionViewCell() }
             
+            cell.backgroundColor = .systemGray3
             cell.layer.borderColor = UIColor.systemGray.cgColor
             cell.layer.borderWidth = 1
             cell.setupCell(bill: (self?.billList[indexPath.row])!)
@@ -75,7 +77,7 @@ extension BillListViewController: BillListProtocol {
                 fatalError("Could not dequeue sectionHeader: \(BillInfoCollectionHeaderView.identifier)")
             }
             sectionHeader.delegate = self
-            sectionHeader.backgroundColor = .secondarySystemBackground
+            sectionHeader.backgroundColor = .systemGray6
             return sectionHeader
          }
     }
