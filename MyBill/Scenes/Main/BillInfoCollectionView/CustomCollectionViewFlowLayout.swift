@@ -27,7 +27,7 @@ final class CustomCollectionViewFlowLayout: UICollectionViewFlowLayout {
             for attributes in stLayoutAttributes {
                 if let elmKind = attributes.representedElementKind, elmKind == UICollectionView.elementKindSectionHeader {
                     
-                    let height = UIScreen.main.bounds.height / 4.5
+                    let height = UIScreen.main.bounds.height / 5
                     let diffValue = abs(offset.y)
                     var frame = attributes.frame
                     frame.size.height = max(0, height + diffValue)

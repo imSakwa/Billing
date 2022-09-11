@@ -43,21 +43,21 @@ final class MonthlyGoalViewController: UIViewController {
     
     private lazy var nameView: SettingBoxView = {
         let view = SettingBoxView(title: "닉네임", boxType: .text)
-        view.inputTextField.delegate = self
+        view.inputTextField.delegate = presenter
         view.inputTextField.inputAccessoryView = textfieldAccessoryView
         return view
     }()
     
     private lazy var goalPriceView: SettingBoxView = {
         let view = SettingBoxView(title: "목표액", boxType: .number)
-        view.inputTextField.delegate = self
+        view.inputTextField.delegate = presenter
         view.inputTextField.inputAccessoryView = textfieldAccessoryView
         return view
     }()
     
     private lazy var memoView: SettingBoxView = {
         let view = SettingBoxView(title: "메모(최대 30자)", boxType: .text)
-        view.inputTextField.delegate = self
+        view.inputTextField.delegate = presenter
         return view
     }()
     
@@ -149,6 +149,20 @@ extension MonthlyGoalViewController: MonthlyGoalProtocol {
             $0.height.equalTo(42)
         }
     }
+    
+    func setShouldReturn() {
+        self.view.endEditing(true)
+    }
+    
+    func setDidEndEditing(textField: UITextField) {
+        if textField == goalPriceView.inputTextField {
+            checkInputValue()
+        }
+        
+        if textField == nameView.inputTextField {
+            textField.checkMaxLength(textField: textField, maxLength: 10)
+        }
+    }
 }
 
 private extension MonthlyGoalViewController {
@@ -187,19 +201,3 @@ private extension MonthlyGoalViewController {
     }
 }
 
-extension MonthlyGoalViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == goalPriceView.inputTextField {
-            
-            checkInputValue()
-        }
-        
-        if textField == nameView.inputTextField {
-            textField.checkMaxLength(textField: textField, maxLength: 10)
-        }
-    }
-}

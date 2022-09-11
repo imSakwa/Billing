@@ -6,12 +6,15 @@
 //
 
 import Foundation
+import UIKit
 
 protocol MonthlyGoalProtocol: AnyObject {
     func setupNavigationBar()
     func setupObserver()
     func setupLayout()
     func setMyGoal()
+    func setShouldReturn()
+    func setDidEndEditing(textField: UITextField)
 }
 
 final class MonthlyGoalPresenter: NSObject {
@@ -30,5 +33,17 @@ final class MonthlyGoalPresenter: NSObject {
     
     func tapEnterButton() {
         viewController?.setMyGoal()
+    }
+}
+
+extension MonthlyGoalPresenter: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        viewController?.setShouldReturn()
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        viewController?.setDidEndEditing(textField: textField)
     }
 }
