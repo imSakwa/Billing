@@ -167,6 +167,7 @@ extension MonthlyGoalViewController: MonthlyGoalProtocol {
 
 private extension MonthlyGoalViewController {
     @objc func keyboardWillShow() {
+        self.view.frame.origin.y = 0
         self.view.frame.origin.y -= 30
     }
     
