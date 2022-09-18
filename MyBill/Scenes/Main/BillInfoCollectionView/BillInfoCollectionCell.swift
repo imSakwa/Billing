@@ -63,6 +63,14 @@ final class BillInfoCollectionCell: UICollectionViewCell {
         dateLabel.text = bill.date
         memoTextView.text = bill.memo
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        costLabel.text = "금액: "
+        dateLabel.text = ""
+        memoTextView.text = ""
+    }
 }
 
 private extension BillInfoCollectionCell {
@@ -85,6 +93,7 @@ private extension BillInfoCollectionCell {
         costLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(4)
             $0.leading.equalTo(titleLabel)
+            $0.trailing.greaterThanOrEqualToSuperview().inset(8)
         }
         
         memoTextView.snp.makeConstraints {

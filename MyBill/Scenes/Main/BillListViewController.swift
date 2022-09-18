@@ -17,7 +17,7 @@ final class BillListViewController: UIViewController {
         Bill(title: "세번째", cost: 1000, memo: "메모", date: "없음"),
         Bill(title: "네번째", cost: 1000, memo: "메모", date: "없음"),
         Bill(title: "오번째", cost: 1000, memo: "메모", date: "없음"),
-        Bill(title: "육번째", cost: 1000, memo: "메모", date: "없음")
+        Bill(title: "육번째", cost: 100000000000000000, memo: "메모", date: "없음")
     ]
         
     private lazy var billCollectionView: UICollectionView = {
