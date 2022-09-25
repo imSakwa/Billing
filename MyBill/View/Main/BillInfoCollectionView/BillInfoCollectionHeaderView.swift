@@ -49,6 +49,12 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
         return label
     }()
    
+    private lazy var addButton: UIButton = {
+        let button = UIButton()
+        button
+        return button
+    }()
+    
     override init(frame: CGRect) {
       super.init(frame: frame)
         

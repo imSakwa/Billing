@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Bill: Hashable {
+struct Bill: Decodable {
     let id = UUID()
     let title: String
     let cost: Int

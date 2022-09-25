@@ -37,6 +37,8 @@ final class BillListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
+        
+        APIService.getBillList()
     }
     
 }
