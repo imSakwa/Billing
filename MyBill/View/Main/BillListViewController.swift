@@ -38,7 +38,15 @@ final class BillListViewController: UIViewController {
         super.viewDidLoad()
         presenter.viewDidLoad()
         
-        APIService.getBillList()
+        APIService.getBillList() { result in
+            switch result {
+            case .success(let data):
+                print("changmin - \(data)")
+            case .failure(let error):
+                print(error)
+        }
+            
+        }
     }
     
 }

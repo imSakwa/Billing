@@ -13,25 +13,29 @@ import FirebaseFirestore
 final class APIService {
     
     
-    static func getBillList() {
+    static func getBillList(completion: @escaping (Result<[Bill], Error>) -> Void) {
+        var billArr: [Bill] = []
         let db = Firestore.firestore()
         
         db.collection("BillList").getDocuments { (snapshot, error) in
             if error != nil {
-                print(error?.localizedDescription)
-                return
+                completion(.failure(error!))
             }
-            
             guard let snapshot = snapshot else { return }
             for document in snapshot.documents {
         
                 if document.documentID == "Bill" {
-                    let aa = try! document.data(as: Bill.self)
-                    print("changmin - \(aa)")
+                    do {
+                        let bill = try document.data(as: Bill.self)
+                        billArr.append(bill)
+                        
+                    } catch {
+                        print("changmin - \(error.localizedDescription)")
+                    }
                 }
             }
+            
+            completion(.success(billArr))
         }
-        
-       
     }
 }
