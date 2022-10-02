@@ -58,7 +58,8 @@ final class BillInfoCollectionCell: UICollectionViewCell {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         
-        costLabel.text = (costLabel.text ?? "")+(numberFormatter.string(from: bill.cost as NSNumber) ?? "")
+        let costFormat = "금액: %@원"
+        costLabel.text = String(format: costFormat, (numberFormatter.string(from: bill.cost as NSNumber) ?? ""))
         
         dateLabel.text = bill.date
         memoTextView.text = bill.memo

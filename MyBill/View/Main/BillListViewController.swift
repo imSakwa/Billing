@@ -11,14 +11,7 @@ import SnapKit
 final class BillListViewController: UIViewController {
     private lazy var presenter = BillListPresenter(viewController: self)
     private var dataSource: UICollectionViewDiffableDataSource<Int ,Bill>!
-    private var billList: [Bill] = [
-        Bill(title: "첫번째", cost: 1000, memo: "메모", date: "없음"),
-        Bill(title: "두번째", cost: 1000, memo: "메모", date: "없음"),
-        Bill(title: "세번째", cost: 1000, memo: "메모", date: "없음"),
-        Bill(title: "네번째", cost: 1000, memo: "메모", date: "없음"),
-        Bill(title: "오번째", cost: 1000, memo: "메모", date: "없음"),
-        Bill(title: "육번째", cost: 100000000000000000, memo: "메모", date: "없음")
-    ]
+    private var billList: [Bill] = []
         
     private lazy var billCollectionView: UICollectionView = {
         let flowLayout = CustomCollectionViewFlowLayout()
@@ -41,11 +34,13 @@ final class BillListViewController: UIViewController {
         APIService.getBillList() { result in
             switch result {
             case .success(let data):
-                print("changmin - \(data)")
+                AppDelegate().NSLog("%@", data)
+                
+                self.billList = data
+                self.configureSnapShot()
             case .failure(let error):
                 print(error)
-        }
-            
+            }
         }
     }
     

@@ -12,7 +12,6 @@ import FirebaseFirestore
 
 final class APIService {
     
-    
     static func getBillList(completion: @escaping (Result<[Bill], Error>) -> Void) {
         var billArr: [Bill] = []
         let db = Firestore.firestore()
@@ -26,9 +25,11 @@ final class APIService {
         
                 if document.documentID == "Bill" {
                     do {
-                        let bill = try document.data(as: Bill.self)
-                        billArr.append(bill)
-                        
+                        for billList in (document.data()["bill"] as! [[String:Any]]) {
+                            let billData = try JSONSerialization.data(withJSONObject: billList)
+                            let bill = try JSONDecoder().decode(Bill.self, from: billData)
+                            billArr.append(bill)
+                        }
                     } catch {
                         print("changmin - \(error.localizedDescription)")
                     }
@@ -36,6 +37,17 @@ final class APIService {
             }
             
             completion(.success(billArr))
+        }
+    }
+    
+    static func setBill(bill: Bill, completion: ((Error?) -> Void)? = nil) {
+        let collectionListener = Firestore.firestore().collection("BillList")
+//        let encode = JSONEncoder.encode(bill.self)
+        guard let object = try? JSONEncoder().encode(bill.self),
+              let aaaa = try? JSONSerialization.jsonObject(with: object, options: []) as? [String: Any] else { return }
+        
+        collectionListener.addDocument(data: aaaa) { error in
+            completion?(error)
         }
     }
 }
