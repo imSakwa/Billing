@@ -30,6 +30,10 @@
 		76A83D4228E06CED00FC5B26 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 76A83D4128E06CED00FC5B26 /* FirebaseCrashlytics */; };
 		76A83D4428E06CED00FC5B26 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 76A83D4328E06CED00FC5B26 /* FirebaseFirestore */; };
 		76A83D4628E06CED00FC5B26 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 76A83D4528E06CED00FC5B26 /* FirebaseFirestoreSwift */; };
+		76D8C94228E1E8FD002A4B0E /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 76D8C94128E1E8FD002A4B0E /* RxCocoa */; };
+		76D8C94428E1E8FD002A4B0E /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 76D8C94328E1E8FD002A4B0E /* RxRelay */; };
+		76D8C94628E1E8FD002A4B0E /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 76D8C94528E1E8FD002A4B0E /* RxSwift */; };
+		76D8C94928E1E943002A4B0E /* BillListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D8C94828E1E943002A4B0E /* BillListViewModel.swift */; };
 		76FF08392896C42100633CE6 /* BillInfoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FF08382896C42100633CE6 /* BillInfoCollectionCell.swift */; };
 		76FF083B2896C43100633CE6 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FF083A2896C43100633CE6 /* Bill.swift */; };
 		76FF08402899703200633CE6 /* MonthlyGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FF083F2899703200633CE6 /* MonthlyGoalViewController.swift */; };
@@ -75,6 +79,7 @@
 		7682A9FB288EE340008A1A50 /* MyBillUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBillUITests.swift; sourceTree = "<group>"; };
 		7682A9FD288EE340008A1A50 /* MyBillUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBillUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		76A83D3828E046C600FC5B26 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		76D8C94828E1E943002A4B0E /* BillListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillListViewModel.swift; sourceTree = "<group>"; };
 		76FF08382896C42100633CE6 /* BillInfoCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillInfoCollectionCell.swift; sourceTree = "<group>"; };
 		76FF083A2896C43100633CE6 /* Bill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
 		76FF083F2899703200633CE6 /* MonthlyGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyGoalViewController.swift; sourceTree = "<group>"; };
@@ -87,12 +92,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76D8C94428E1E8FD002A4B0E /* RxRelay in Frameworks */,
 				76A83D3E28E06CED00FC5B26 /* FirebaseAnalyticsSwift in Frameworks */,
+				76D8C94628E1E8FD002A4B0E /* RxSwift in Frameworks */,
 				76A83D3C28E06CED00FC5B26 /* FirebaseAnalytics in Frameworks */,
 				76A83D4228E06CED00FC5B26 /* FirebaseCrashlytics in Frameworks */,
 				76A83D4628E06CED00FC5B26 /* FirebaseFirestoreSwift in Frameworks */,
 				7682AA10288EE690008A1A50 /* SnapKit in Frameworks */,
 				76A83D4028E06CED00FC5B26 /* FirebaseAuth in Frameworks */,
+				76D8C94228E1E8FD002A4B0E /* RxCocoa in Frameworks */,
 				76A83D4428E06CED00FC5B26 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -163,6 +171,7 @@
 				76FF083C2896C43900633CE6 /* Model */,
 				76A83D3728E046B100FC5B26 /* Repository */,
 				7682AA0A288EE4A1008A1A50 /* View */,
+				76D8C94728E1E912002A4B0E /* ViewModel */,
 				7682AA0D288EE4E1008A1A50 /* Supporting Files */,
 				7682A9E5288EE340008A1A50 /* LaunchScreen.storyboard */,
 			);
@@ -221,6 +230,14 @@
 			path = Repository;
 			sourceTree = "<group>";
 		};
+		76D8C94728E1E912002A4B0E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				76D8C94828E1E943002A4B0E /* BillListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		76FF083C2896C43900633CE6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +290,9 @@
 				76A83D4128E06CED00FC5B26 /* FirebaseCrashlytics */,
 				76A83D4328E06CED00FC5B26 /* FirebaseFirestore */,
 				76A83D4528E06CED00FC5B26 /* FirebaseFirestoreSwift */,
+				76D8C94128E1E8FD002A4B0E /* RxCocoa */,
+				76D8C94328E1E8FD002A4B0E /* RxRelay */,
+				76D8C94528E1E8FD002A4B0E /* RxSwift */,
 			);
 			productName = MyBill;
 			productReference = 7682A9D7288EE33F008A1A50 /* MyBill.app */;
@@ -349,6 +369,7 @@
 			packageReferences = (
 				7682AA0E288EE690008A1A50 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				76A83D3A28E06CED00FC5B26 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				76D8C94028E1E8FD002A4B0E /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = 7682A9D8288EE33F008A1A50 /* Products */;
 			projectDirPath = "";
@@ -398,6 +419,7 @@
 				760AE99E28AA40D8006703B6 /* SettingBoxView.swift in Sources */,
 				7682A9DF288EE33F008A1A50 /* BillListViewController.swift in Sources */,
 				76FF0844289972A100633CE6 /* BillListPresenter.swift in Sources */,
+				76D8C94928E1E943002A4B0E /* BillListViewModel.swift in Sources */,
 				760AE99728AA337C006703B6 /* CustomCollectionViewFlowLayout.swift in Sources */,
 				76FF083B2896C43100633CE6 /* Bill.swift in Sources */,
 				76FF08402899703200633CE6 /* MonthlyGoalViewController.swift in Sources */,
@@ -757,6 +779,14 @@
 				version = 9.6.0;
 			};
 		};
+		76D8C94028E1E8FD002A4B0E /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = exactVersion;
+				version = 6.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -794,6 +824,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 76A83D3A28E06CED00FC5B26 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		76D8C94128E1E8FD002A4B0E /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76D8C94028E1E8FD002A4B0E /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		76D8C94328E1E8FD002A4B0E /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76D8C94028E1E8FD002A4B0E /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		76D8C94528E1E8FD002A4B0E /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76D8C94028E1E8FD002A4B0E /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

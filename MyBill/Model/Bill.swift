@@ -14,3 +14,11 @@ struct Bill: Codable, Hashable {
     let memo: String
     let date: String
 }
+
+struct BillList: Codable {
+    let billList: [Bill]
+    
+    enum CodingKeys: String, CodingKey {
+        case billList = "bill"
+    }
+}
