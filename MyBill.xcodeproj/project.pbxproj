@@ -34,6 +34,8 @@
 		76D8C94428E1E8FD002A4B0E /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 76D8C94328E1E8FD002A4B0E /* RxRelay */; };
 		76D8C94628E1E8FD002A4B0E /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 76D8C94528E1E8FD002A4B0E /* RxSwift */; };
 		76D8C94928E1E943002A4B0E /* BillListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D8C94828E1E943002A4B0E /* BillListViewModel.swift */; };
+		76D8C95128EADC10002A4B0E /* AddBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D8C95028EADC10002A4B0E /* AddBillViewController.swift */; };
+		76D8C95328EADC47002A4B0E /* AddBillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D8C95228EADC47002A4B0E /* AddBillViewModel.swift */; };
 		76FF08392896C42100633CE6 /* BillInfoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FF08382896C42100633CE6 /* BillInfoCollectionCell.swift */; };
 		76FF083B2896C43100633CE6 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FF083A2896C43100633CE6 /* Bill.swift */; };
 		76FF08402899703200633CE6 /* MonthlyGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FF083F2899703200633CE6 /* MonthlyGoalViewController.swift */; };
@@ -80,6 +82,8 @@
 		7682A9FD288EE340008A1A50 /* MyBillUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBillUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		76A83D3828E046C600FC5B26 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		76D8C94828E1E943002A4B0E /* BillListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillListViewModel.swift; sourceTree = "<group>"; };
+		76D8C95028EADC10002A4B0E /* AddBillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBillViewController.swift; sourceTree = "<group>"; };
+		76D8C95228EADC47002A4B0E /* AddBillViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBillViewModel.swift; sourceTree = "<group>"; };
 		76FF08382896C42100633CE6 /* BillInfoCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillInfoCollectionCell.swift; sourceTree = "<group>"; };
 		76FF083A2896C43100633CE6 /* Bill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
 		76FF083F2899703200633CE6 /* MonthlyGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyGoalViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +202,8 @@
 		7682AA0A288EE4A1008A1A50 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				76D8C95428EADD9B002A4B0E /* CommonVIew */,
+				76D8C94F28EADBF7002A4B0E /* AddBill */,
 				76FF083D28996F6B00633CE6 /* Main */,
 				76FF083E28996F7100633CE6 /* MonthlyGoal */,
 			);
@@ -233,9 +239,26 @@
 		76D8C94728E1E912002A4B0E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				76D8C95228EADC47002A4B0E /* AddBillViewModel.swift */,
 				76D8C94828E1E943002A4B0E /* BillListViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		76D8C94F28EADBF7002A4B0E /* AddBill */ = {
+			isa = PBXGroup;
+			children = (
+				76D8C95028EADC10002A4B0E /* AddBillViewController.swift */,
+			);
+			path = AddBill;
+			sourceTree = "<group>";
+		};
+		76D8C95428EADD9B002A4B0E /* CommonVIew */ = {
+			isa = PBXGroup;
+			children = (
+				760AE99D28AA40D8006703B6 /* SettingBoxView.swift */,
+			);
+			path = CommonVIew;
 			sourceTree = "<group>";
 		};
 		76FF083C2896C43900633CE6 /* Model */ = {
@@ -261,7 +284,6 @@
 			children = (
 				76FF083F2899703200633CE6 /* MonthlyGoalViewController.swift */,
 				76FF08412899707B00633CE6 /* MonthlyGoalPresenter.swift */,
-				760AE99D28AA40D8006703B6 /* SettingBoxView.swift */,
 			);
 			path = MonthlyGoal;
 			sourceTree = "<group>";
@@ -416,6 +438,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				760AE99528A8E325006703B6 /* BillInfoCollectionHeaderView.swift in Sources */,
+				76D8C95128EADC10002A4B0E /* AddBillViewController.swift in Sources */,
 				760AE99E28AA40D8006703B6 /* SettingBoxView.swift in Sources */,
 				7682A9DF288EE33F008A1A50 /* BillListViewController.swift in Sources */,
 				76FF0844289972A100633CE6 /* BillListPresenter.swift in Sources */,
@@ -425,6 +448,7 @@
 				76FF08402899703200633CE6 /* MonthlyGoalViewController.swift in Sources */,
 				760AE9A128B223AF006703B6 /* UITextFieldExtension.swift in Sources */,
 				76A83D3928E046C600FC5B26 /* APIService.swift in Sources */,
+				76D8C95328EADC47002A4B0E /* AddBillViewModel.swift in Sources */,
 				7682A9DB288EE33F008A1A50 /* AppDelegate.swift in Sources */,
 				76FF08422899707B00633CE6 /* MonthlyGoalPresenter.swift in Sources */,
 				76FF08392896C42100633CE6 /* BillInfoCollectionCell.swift in Sources */,

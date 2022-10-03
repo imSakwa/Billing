@@ -10,6 +10,7 @@ import UIKit
 
 protocol BillInfoHeaderDelegate {
     func tapSettingButton()
+    func tapAddButton()
 }
 
 final class BillInfoCollectionHeaderView: UICollectionReusableView {
@@ -51,7 +52,8 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
    
     private lazy var addButton: UIButton = {
         let button = UIButton()
-        button
+        button.setImage(UIImage(systemName: "plus.rectangle"), for: .normal)
+        button.addTarget(self, action: #selector(tapAddButton), for: .touchUpInside)
         return button
     }()
     
@@ -68,7 +70,7 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
 
 private extension BillInfoCollectionHeaderView {
     func setupLayout() {
-        [nameLabel, balanceLabel, conditionLabel, goalButton].forEach { self.addSubview($0) }
+        [nameLabel, balanceLabel, conditionLabel, goalButton, addButton].forEach { self.addSubview($0) }
         
         nameLabel.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide).offset(40)
@@ -90,9 +92,21 @@ private extension BillInfoCollectionHeaderView {
             $0.trailing.equalToSuperview().inset(16)
             $0.size.equalTo(24)
         }
+        
+        addButton.snp.makeConstraints {
+            $0.top.equalTo(goalButton.snp.bottom).offset(16)
+            $0.trailing.equalToSuperview().inset(16)
+            $0.size.equalTo(24)
+        }
     }
     
     @objc func tapSettingButton(_ sender: UIButton) {
         delegate?.tapSettingButton()
+    }
+    
+    @objc func tapAddButton(_ sender: UIButton) {
+//        APIService.setBill(bill: Bill(title: "입력 제목", cost: 119119, memo: "입력 메모", date: "2022-10-02 15:00"))
+        
+        delegate?.tapAddButton()
     }
 }

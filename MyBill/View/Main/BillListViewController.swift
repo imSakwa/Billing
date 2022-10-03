@@ -120,4 +120,10 @@ extension BillListViewController: BillInfoHeaderDelegate {
         
         self.navigationController?.pushViewController(goalVC, animated: true)
     }
+    
+    func tapAddButton() {
+        let addBillVC = AddBillViewController()
+        
+        self.present(addBillVC, animated: true)
+    }
 }
