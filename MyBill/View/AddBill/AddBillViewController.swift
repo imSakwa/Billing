@@ -6,13 +6,15 @@
 //
 
 import UIKit
-import SnapKit
-import RxSwift
+
 import RxCocoa
+import RxSwift
+import SnapKit
+
 
 final class AddBillViewController: UIViewController {
-    var viewModel: AddBillViewModelType
-    var disposeBag = DisposeBag()
+    var viewModel: AddBillViewModel
+    let disposeBag = DisposeBag()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -26,12 +28,12 @@ final class AddBillViewController: UIViewController {
     }()
     
     private lazy var dateInputBox: SettingBoxView = {
-        let box = SettingBoxView(title: "날짜", boxType: .text)
+        let box = SettingBoxView(title: "날짜", boxType: .date)
         return box
     }()
     
     private lazy var costInputBox: SettingBoxView = {
-        let box = SettingBoxView(title: "금액", boxType: .text)
+        let box = SettingBoxView(title: "금액", boxType: .number)
         return box
     }()
     
@@ -41,9 +43,21 @@ final class AddBillViewController: UIViewController {
 //        return box
 //    }()
     
-    init(viewModel: AddBillViewModelType = AddBillViewModel()) {
+    private lazy var enterButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("완료", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .secondarySystemBackground
+        button.layer.borderColor = UIColor.systemGray.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 10
+        return button
+    }()
+    
+    init(viewModel: AddBillViewModel = AddBillViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -53,6 +67,7 @@ final class AddBillViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        bindViewModel()
     }
 }
 
@@ -60,7 +75,7 @@ private extension AddBillViewController {
     func setupView() {
         self.view.backgroundColor = .white
         
-        [titleLabel, titleInputBox, dateInputBox, costInputBox ]
+        [titleLabel, titleInputBox, dateInputBox, costInputBox, enterButton]
             .forEach {
                 self.view.addSubview($0)
             }
@@ -85,5 +100,23 @@ private extension AddBillViewController {
             $0.top.equalTo(dateInputBox.snp.bottom).offset(20)
             $0.leading.trailing.equalTo(titleInputBox)
         }
+        
+        enterButton.snp.makeConstraints {
+            $0.top.equalTo(costInputBox.snp.bottom).offset(20)
+            $0.leading.trailing.equalTo(titleInputBox)
+        }
     }
+    
+    func bindViewModel() {
+        let input = AddBillViewModel.Input(
+            titleText: titleInputBox.inputTextField.rx.text.orEmpty.asObservable(),
+            dateText: dateInputBox.inputTextField.rx.text.orEmpty.asObservable()
+        )
+        
+        let output = viewModel.transform(input: input)
+        
+        
+    }
+    
+    
 }

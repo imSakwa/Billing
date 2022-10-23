@@ -11,6 +11,7 @@ import UIKit
 enum BoxType {
     case text
     case number
+    case date
 }
 
 final class SettingBoxView: UIView {
@@ -28,6 +29,13 @@ final class SettingBoxView: UIView {
         let textField = UITextField()
         textField.clearButtonMode = .whileEditing
         return textField
+    }()
+    
+    private lazy var datePickerView: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        datePicker.isHidden = true
+        datePicker.datePickerMode = .dateAndTime
+        return datePicker
     }()
     
     override var intrinsicContentSize: CGSize {
@@ -64,9 +72,13 @@ private extension SettingBoxView {
         case .number:
             self.inputTextField.keyboardType = .numberPad
             self.inputTextField.addDoneButtonOnKeyboard()
+            
+        case .date:
+            self.inputTextField.isHidden = true
+            self.datePickerView.isHidden = false
         }
         
-        [titleLabel, inputTextField].forEach { addSubview($0) }
+        [titleLabel, inputTextField, datePickerView].forEach { addSubview($0) }
         
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(8)
@@ -75,6 +87,13 @@ private extension SettingBoxView {
         }
         
         inputTextField.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(4)
+            $0.leading.equalTo(titleLabel)
+            $0.trailing.equalToSuperview().inset(16)
+            $0.bottom.equalToSuperview().inset(8)
+        }
+        
+        datePickerView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(4)
             $0.leading.equalTo(titleLabel)
             $0.trailing.equalToSuperview().inset(16)

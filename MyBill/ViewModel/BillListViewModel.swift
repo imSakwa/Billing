@@ -12,6 +12,17 @@ protocol BillListViewModelProtocol {
     
 }
 
-final class BillListViewModel {
+protocol BillListViewModelInput {
     
+}
+
+protocol BillListViewModelOutput {
+    
+    
+}
+
+final class BillListViewModel {
+    init() {
+        
+    }
 }
