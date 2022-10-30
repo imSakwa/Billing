@@ -18,7 +18,7 @@ final class AddBillViewController: UIViewController {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "사용한 금액을 입력해봐요."
+        label.text = "사용한 금액을 입력해주세요."
         return label
     }()
     
@@ -47,6 +47,7 @@ final class AddBillViewController: UIViewController {
         let button = UIButton()
         button.setTitle("완료", for: .normal)
         button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.systemGray, for: .disabled)
         button.backgroundColor = .secondarySystemBackground
         button.layer.borderColor = UIColor.systemGray.cgColor
         button.layer.borderWidth = 1
@@ -110,11 +111,18 @@ private extension AddBillViewController {
     func bindViewModel() {
         let input = AddBillViewModel.Input(
             titleText: titleInputBox.inputTextField.rx.text.orEmpty.asObservable(),
-            dateText: dateInputBox.inputTextField.rx.text.orEmpty.asObservable()
+            dateText: dateInputBox.datePickerView.rx.date.asObservable(),
+            costText: costInputBox.inputTextField.rx.text.orEmpty.asObservable(),
+            enterButton: enterButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(input: input)
         
+        output.isEnterEnabled
+            .drive(onNext: { [weak self] in
+                self?.enterButton.isEnabled = $0
+            })
+            .disposed(by: disposeBag)
         
     }
     

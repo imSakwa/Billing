@@ -31,7 +31,7 @@ final class SettingBoxView: UIView {
         return textField
     }()
     
-    private lazy var datePickerView: UIDatePicker = {
+    private(set) lazy var datePickerView: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.isHidden = true
         datePicker.datePickerMode = .dateAndTime
