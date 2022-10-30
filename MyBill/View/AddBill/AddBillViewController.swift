@@ -11,9 +11,13 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
+protocol AddBillDelegate {
+    func updateBillList()
+}
 
 final class AddBillViewController: UIViewController {
     var viewModel: AddBillViewModel
+    var delegate: AddBillDelegate?
     let disposeBag = DisposeBag()
     
     private let titleLabel: UILabel = {
@@ -129,7 +133,9 @@ private extension AddBillViewController {
         output.addBill
             .subscribe(
                 onNext: { [weak self] in
-                    self?.dismiss(animated: true)
+                    self?.dismiss(animated: true) { [weak self] in
+                        self?.delegate?.updateBillList()
+                    }
                 }
             )
             .disposed(by: disposeBag)

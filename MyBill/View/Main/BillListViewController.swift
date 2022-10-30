@@ -30,18 +30,13 @@ final class BillListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("viewWillAppear")
         
-        APIService.getBillList() { result in
-            switch result {
-            case .success(let data):
-                AppDelegate().NSLog("%@", data)
-                
-                self.billList = data
-                self.configureSnapShot()
-            case .failure(let error):
-                print(error)
-            }
-        }
+        self.getBillList()
     }
     
 }
@@ -57,8 +52,8 @@ extension BillListViewController: BillListProtocol {
         [billCollectionView].forEach { view.addSubview($0) }
                 
         billCollectionView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.top.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
         }
     }
     
@@ -102,7 +97,19 @@ extension BillListViewController: BillListProtocol {
 }
 
 private extension BillListViewController {
-    
+    func getBillList() {
+        APIService.getBillList() { result in
+            switch result {
+            case .success(let data):
+                AppDelegate().NSLog("%@", data)
+                
+                self.billList = data
+                self.configureSnapShot()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
 
 extension BillListViewController: BillInfoHeaderDelegate {
@@ -123,7 +130,16 @@ extension BillListViewController: BillInfoHeaderDelegate {
     
     func tapAddButton() {
         let addBillVC = AddBillViewController()
+        addBillVC.delegate = self
         
-        self.present(addBillVC, animated: true)
+        self.present(addBillVC, animated: true) { [weak self] in
+            print("addBill close")
+        }
+    }
+}
+
+extension BillListViewController: AddBillDelegate {
+    func updateBillList() {
+        self.getBillList()
     }
 }
