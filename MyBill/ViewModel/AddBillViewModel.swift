@@ -22,6 +22,7 @@ final class AddBillViewModel: AddBillViewModelType {
         let titleText: Observable<String>
         let dateText: Observable<Date>
         let costText: Observable<String>
+        let memoText: Observable<String>
         let enterButton: Observable<Void>
     }
     
@@ -34,6 +35,7 @@ final class AddBillViewModel: AddBillViewModelType {
     private let titleText = BehaviorRelay(value: "")
     private let dateText = BehaviorRelay(value: "")
     private let costText = BehaviorRelay(value: "0")
+    private let memoText = BehaviorRelay(value: "")
     private let enterButtonTap = PublishRelay<Void>()
     
     func transform(input: Input) -> Output {
@@ -60,6 +62,14 @@ final class AddBillViewModel: AddBillViewModelType {
             )
             .disposed(by: disposeBag)
         
+        input.memoText
+            .subscribe(
+                onNext: { [weak self] in
+                    self?.memoText.accept($0)
+                }
+            )
+            .disposed(by: disposeBag)
+        
         input.enterButton
             .subscribe(
                 onNext: { [weak self] in
@@ -71,9 +81,10 @@ final class AddBillViewModel: AddBillViewModelType {
         
         let validateEnterButton = Driver.combineLatest(
             titleText.asDriver(),
-            dateText.asDriver()
+            costText.asDriver(),
+            memoText.asDriver()
         ) {
-            !$0.isEmpty && !$1.isEmpty
+            !$0.isEmpty && !$1.isEmpty && !$2.isEmpty
         }
         
         return Output(
@@ -86,8 +97,14 @@ final class AddBillViewModel: AddBillViewModelType {
         let titleValue = titleText.value
         let dateValue = dateText.value
         let costValue = costText.value
+        let memoValue = memoText.value
         
-        let bill = Bill(title: titleValue, cost: Int(costValue)!, memo: "", date: dateValue)
+        let bill = Bill(
+            title: titleValue,
+            cost: Int(costValue)!,
+            memo: memoValue,
+            date: dateValue
+        )
         
         APIService.setBill(bill: bill) { error in
             if let error = error {

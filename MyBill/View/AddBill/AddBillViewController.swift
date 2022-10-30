@@ -41,11 +41,10 @@ final class AddBillViewController: UIViewController {
         return box
     }()
     
-//    private let memoInputBox: SettingBoxView = {
-//        let box = SettingBoxView(title: "제목", boxType: .text)
-//        box.text = "메모"
-//        return box
-//    }()
+    private lazy var memoInputBox: SettingBoxView = {
+        let box = SettingBoxView(title: "메모", boxType: .text)
+        return box
+    }()
     
     private lazy var enterButton: UIButton = {
         let button = UIButton()
@@ -80,7 +79,7 @@ private extension AddBillViewController {
     func setupView() {
         self.view.backgroundColor = .white
         
-        [titleLabel, titleInputBox, dateInputBox, costInputBox, enterButton]
+        [titleLabel, titleInputBox, dateInputBox, costInputBox, memoInputBox, enterButton]
             .forEach {
                 self.view.addSubview($0)
             }
@@ -106,9 +105,15 @@ private extension AddBillViewController {
             $0.leading.trailing.equalTo(titleInputBox)
         }
         
-        enterButton.snp.makeConstraints {
+        memoInputBox.snp.makeConstraints {
             $0.top.equalTo(costInputBox.snp.bottom).offset(20)
             $0.leading.trailing.equalTo(titleInputBox)
+        }
+        
+        enterButton.snp.makeConstraints {
+            $0.leading.trailing.equalTo(titleInputBox)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            $0.height.equalTo(48)
         }
     }
     
@@ -117,6 +122,7 @@ private extension AddBillViewController {
             titleText: titleInputBox.inputTextField.rx.text.orEmpty.asObservable(),
             dateText: dateInputBox.datePickerView.rx.date.asObservable(),
             costText: costInputBox.inputTextField.rx.text.orEmpty.asObservable(),
+            memoText: memoInputBox.inputTextField.rx.text.orEmpty.asObservable(),
             enterButton: enterButton.rx.tap.asObservable()
         )
                 
