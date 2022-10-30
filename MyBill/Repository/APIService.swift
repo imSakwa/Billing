@@ -35,7 +35,7 @@ final class APIService {
         }
     }
     
-    static func setBill(bill: Bill, completion: ((Error?) -> Void)? = nil) {
+    static func setBill(bill: Bill, completion: (Error?) -> Void) {
         var billArr: [Bill] = []
         let documentListener = Firestore.firestore().collection("BillList").document("Bill")
         

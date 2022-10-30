@@ -115,15 +115,24 @@ private extension AddBillViewController {
             costText: costInputBox.inputTextField.rx.text.orEmpty.asObservable(),
             enterButton: enterButton.rx.tap.asObservable()
         )
-        
+                
         let output = viewModel.transform(input: input)
         
         output.isEnterEnabled
-            .drive(onNext: { [weak self] in
-                self?.enterButton.isEnabled = $0
-            })
+            .drive(
+                onNext: { [weak self] in
+                    self?.enterButton.isEnabled = $0
+                }
+            )
             .disposed(by: disposeBag)
         
+        output.addBill
+            .subscribe(
+                onNext: { [weak self] in
+                    self?.dismiss(animated: true)
+                }
+            )
+            .disposed(by: disposeBag)
     }
     
     

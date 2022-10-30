@@ -27,12 +27,14 @@ final class AddBillViewModel: AddBillViewModelType {
     
     struct Output {
         let isEnterEnabled: Driver<Bool>
+        let addBill: Observable<Void>
     }
     
     private let disposeBag = DisposeBag()
     private let titleText = BehaviorRelay(value: "")
     private let dateText = BehaviorRelay(value: "")
-    private let costText = BehaviorRelay(value: "")
+    private let costText = BehaviorRelay(value: "0")
+    private let enterButtonTap = PublishRelay<Void>()
     
     func transform(input: Input) -> Output {
         input.titleText
@@ -62,35 +64,43 @@ final class AddBillViewModel: AddBillViewModelType {
             .subscribe(
                 onNext: { [weak self] in
                     self?.clickEnterButton()
+                    self?.enterButtonTap.accept($0)
                 }
             )
             .disposed(by: disposeBag)
         
-        let observable = Driver.combineLatest(
+        let validateEnterButton = Driver.combineLatest(
             titleText.asDriver(),
             dateText.asDriver()
         ) {
             !$0.isEmpty && !$1.isEmpty
         }
         
-        return Output(isEnterEnabled: observable)
+        return Output(
+            isEnterEnabled: validateEnterButton,
+            addBill: enterButtonTap.asObservable()
+        )
     }
     
-    func clickEnterButton() {
+    private func clickEnterButton() {
         let titleValue = titleText.value
         let dateValue = dateText.value
         let costValue = costText.value
         
-        print("\(titleValue), \(dateValue), \(costValue)")
+        let bill = Bill(title: titleValue, cost: Int(costValue)!, memo: "", date: dateValue)
+        
+        APIService.setBill(bill: bill) { error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+        
+        
     }
     
-    func dateToString(date: Date) -> String {
+    private func dateToString(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
         return dateFormatter.string(from: date)
     }
-}
-
-extension AddBillViewModel {
-   
 }
