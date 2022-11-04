@@ -33,12 +33,12 @@ final class BillListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
+        readRealm()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        readRealm()
         getBillList()
     }
     
