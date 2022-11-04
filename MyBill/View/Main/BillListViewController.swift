@@ -6,12 +6,15 @@
 //
 
 import UIKit
+
+import RealmSwift
 import SnapKit
 
 final class BillListViewController: UIViewController {
     private lazy var presenter = BillListPresenter(viewController: self)
     private var dataSource: UICollectionViewDiffableDataSource<Int ,Bill>!
     private var billList: [Bill] = []
+    let realm = try! Realm()
         
     private lazy var billCollectionView: UICollectionView = {
         let flowLayout = CustomCollectionViewFlowLayout()
@@ -34,9 +37,9 @@ final class BillListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("viewWillAppear")
         
-        self.getBillList()
+        readRealm()
+        getBillList()
     }
     
 }
@@ -98,17 +101,48 @@ extension BillListViewController: BillListProtocol {
 
 private extension BillListViewController {
     func getBillList() {
-        APIService.getBillList() { result in
+        APIService.getBillList() { [weak self] result in
             switch result {
             case .success(let data):
                 AppDelegate().NSLog("%@", data)
                 
-                self.billList = data
-                self.configureSnapShot()
+                self?.billList = data
+                self?.configureSnapShot()
+                self?.createRealm(data: data)
+                
             case .failure(let error):
                 print(error)
             }
         }
+    }
+    
+    func createRealm(data: [Bill]) {
+        try! realm.write {
+            realm.deleteAll()
+        }
+        
+        for bill in data {
+            let billObject = BillObject(
+                title: bill.title,
+                cost: bill.cost,
+                memo: bill.memo,
+                date: bill.date
+            )
+            
+            try! realm.write {
+                realm.add(billObject)
+            }
+        }
+    }
+    
+    func readRealm() {
+        let billObject = realm.objects(BillObject.self)
+        
+        for bill in billObject {
+            billList.append(Bill(title: bill.title, cost: bill.cost, memo: bill.memo, date: bill.date))
+        }
+        configureSnapShot()
+        
     }
 }
 
@@ -123,16 +157,16 @@ extension BillListViewController: BillInfoHeaderDelegate {
         
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         backBarButtonItem.tintColor = .buttonColor
-        self.navigationItem.backBarButtonItem = backBarButtonItem
+        navigationItem.backBarButtonItem = backBarButtonItem
         
-        self.navigationController?.pushViewController(goalVC, animated: true)
+        navigationController?.pushViewController(goalVC, animated: true)
     }
     
     func tapAddButton() {
         let addBillVC = AddBillViewController()
         addBillVC.delegate = self
         
-        self.present(addBillVC, animated: true) { [weak self] in
+        present(addBillVC, animated: true) { [weak self] in
             print("addBill close")
         }
     }
@@ -140,6 +174,6 @@ extension BillListViewController: BillInfoHeaderDelegate {
 
 extension BillListViewController: AddBillDelegate {
     func updateBillList() {
-        self.getBillList()
+        getBillList()
     }
 }

@@ -36,6 +36,8 @@
 		76D8C94928E1E943002A4B0E /* BillListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D8C94828E1E943002A4B0E /* BillListViewModel.swift */; };
 		76D8C95128EADC10002A4B0E /* AddBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D8C95028EADC10002A4B0E /* AddBillViewController.swift */; };
 		76D8C95328EADC47002A4B0E /* AddBillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D8C95228EADC47002A4B0E /* AddBillViewModel.swift */; };
+		76D8F25829154DEC0062D0B1 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 76D8F25729154DEC0062D0B1 /* Realm */; };
+		76D8F25A29154DEC0062D0B1 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 76D8F25929154DEC0062D0B1 /* RealmSwift */; };
 		76FF08392896C42100633CE6 /* BillInfoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FF08382896C42100633CE6 /* BillInfoCollectionCell.swift */; };
 		76FF083B2896C43100633CE6 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FF083A2896C43100633CE6 /* Bill.swift */; };
 		76FF08402899703200633CE6 /* MonthlyGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FF083F2899703200633CE6 /* MonthlyGoalViewController.swift */; };
@@ -96,6 +98,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76D8F25A29154DEC0062D0B1 /* RealmSwift in Frameworks */,
+				76D8F25829154DEC0062D0B1 /* Realm in Frameworks */,
 				76D8C94428E1E8FD002A4B0E /* RxRelay in Frameworks */,
 				76A83D3E28E06CED00FC5B26 /* FirebaseAnalyticsSwift in Frameworks */,
 				76D8C94628E1E8FD002A4B0E /* RxSwift in Frameworks */,
@@ -315,6 +319,8 @@
 				76D8C94128E1E8FD002A4B0E /* RxCocoa */,
 				76D8C94328E1E8FD002A4B0E /* RxRelay */,
 				76D8C94528E1E8FD002A4B0E /* RxSwift */,
+				76D8F25729154DEC0062D0B1 /* Realm */,
+				76D8F25929154DEC0062D0B1 /* RealmSwift */,
 			);
 			productName = MyBill;
 			productReference = 7682A9D7288EE33F008A1A50 /* MyBill.app */;
@@ -392,6 +398,7 @@
 				7682AA0E288EE690008A1A50 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				76A83D3A28E06CED00FC5B26 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				76D8C94028E1E8FD002A4B0E /* XCRemoteSwiftPackageReference "RxSwift" */,
+				76D8F25629154DEC0062D0B1 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 7682A9D8288EE33F008A1A50 /* Products */;
 			projectDirPath = "";
@@ -811,6 +818,14 @@
 				version = 6.5.0;
 			};
 		};
+		76D8F25629154DEC0062D0B1 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.32.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -863,6 +878,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 76D8C94028E1E8FD002A4B0E /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		76D8F25729154DEC0062D0B1 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76D8F25629154DEC0062D0B1 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		76D8F25929154DEC0062D0B1 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76D8F25629154DEC0062D0B1 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
