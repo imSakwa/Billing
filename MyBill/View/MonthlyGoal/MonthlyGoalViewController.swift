@@ -66,14 +66,9 @@ final class MonthlyGoalViewController: UIViewController {
         return view
     }()
     
-    private lazy var enterButton: UIButton = {
-        let button = UIButton()
+    private lazy var enterButton: CommonButtonView = {
+        let button = CommonButtonView()
         button.setTitle("완료", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .secondarySystemBackground
-        button.layer.borderColor = UIColor.systemGray.cgColor
-        button.layer.borderWidth = 1
-        button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(tapEnterButton), for: .touchUpInside)
         return button
     }()

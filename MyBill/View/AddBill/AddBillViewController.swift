@@ -46,15 +46,9 @@ final class AddBillViewController: UIViewController {
         return box
     }()
     
-    private lazy var enterButton: UIButton = {
-        let button = UIButton()
+    private lazy var enterButton: CommonButtonView = {
+        let button = CommonButtonView()
         button.setTitle("완료", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.setTitleColor(.systemGray, for: .disabled)
-        button.backgroundColor = .secondarySystemBackground
-        button.layer.borderColor = UIColor.systemGray.cgColor
-        button.layer.borderWidth = 1
-        button.layer.cornerRadius = 10
         return button
     }()
     
@@ -64,9 +58,7 @@ final class AddBillViewController: UIViewController {
         
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder: NSCoder) { fatalError() }
     
     override func viewDidLoad() {
         super.viewDidLoad()

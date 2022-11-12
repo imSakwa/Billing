@@ -13,6 +13,9 @@
 		760AE99C28AA374E006703B6 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760AE99B28AA374E006703B6 /* ColorExtension.swift */; };
 		760AE99E28AA40D8006703B6 /* SettingBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760AE99D28AA40D8006703B6 /* SettingBoxView.swift */; };
 		760AE9A128B223AF006703B6 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760AE9A028B223AF006703B6 /* UITextFieldExtension.swift */; };
+		7610E914291F9DCD009BE09E /* StartingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7610E913291F9DCD009BE09E /* StartingViewController.swift */; };
+		7610E916291FA161009BE09E /* StartingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7610E915291FA161009BE09E /* StartingViewModel.swift */; };
+		7610E918291FA51C009BE09E /* CommonButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7610E917291FA51C009BE09E /* CommonButtonView.swift */; };
 		76138F7828CE579A00A38732 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76138F7728CE579A00A38732 /* GoogleService-Info.plist */; };
 		7682A9DB288EE33F008A1A50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7682A9DA288EE33F008A1A50 /* AppDelegate.swift */; };
 		7682A9DD288EE33F008A1A50 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7682A9DC288EE33F008A1A50 /* SceneDelegate.swift */; };
@@ -69,6 +72,9 @@
 		760AE99B28AA374E006703B6 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		760AE99D28AA40D8006703B6 /* SettingBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingBoxView.swift; sourceTree = "<group>"; };
 		760AE9A028B223AF006703B6 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
+		7610E913291F9DCD009BE09E /* StartingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingViewController.swift; sourceTree = "<group>"; };
+		7610E915291FA161009BE09E /* StartingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingViewModel.swift; sourceTree = "<group>"; };
+		7610E917291FA51C009BE09E /* CommonButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButtonView.swift; sourceTree = "<group>"; };
 		76138F7728CE579A00A38732 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7682A9D7288EE33F008A1A50 /* MyBill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7682A9DA288EE33F008A1A50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +155,15 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		7610E912291F9D35009BE09E /* Starting */ = {
+			isa = PBXGroup;
+			children = (
+				7610E913291F9DCD009BE09E /* StartingViewController.swift */,
+				7610E915291FA161009BE09E /* StartingViewModel.swift */,
+			);
+			path = Starting;
+			sourceTree = "<group>";
+		};
 		7682A9CE288EE33F008A1A50 = {
 			isa = PBXGroup;
 			children = (
@@ -206,10 +221,11 @@
 		7682AA0A288EE4A1008A1A50 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				76D8C95428EADD9B002A4B0E /* CommonVIew */,
 				76D8C94F28EADBF7002A4B0E /* AddBill */,
+				76D8C95428EADD9B002A4B0E /* CommonVIew */,
 				76FF083D28996F6B00633CE6 /* Main */,
 				76FF083E28996F7100633CE6 /* MonthlyGoal */,
+				7610E912291F9D35009BE09E /* Starting */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -261,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				760AE99D28AA40D8006703B6 /* SettingBoxView.swift */,
+				7610E917291FA51C009BE09E /* CommonButtonView.swift */,
 			);
 			path = CommonVIew;
 			sourceTree = "<group>";
@@ -446,6 +463,7 @@
 			files = (
 				760AE99528A8E325006703B6 /* BillInfoCollectionHeaderView.swift in Sources */,
 				76D8C95128EADC10002A4B0E /* AddBillViewController.swift in Sources */,
+				7610E916291FA161009BE09E /* StartingViewModel.swift in Sources */,
 				760AE99E28AA40D8006703B6 /* SettingBoxView.swift in Sources */,
 				7682A9DF288EE33F008A1A50 /* BillListViewController.swift in Sources */,
 				76FF0844289972A100633CE6 /* BillListPresenter.swift in Sources */,
@@ -454,7 +472,9 @@
 				76FF083B2896C43100633CE6 /* Bill.swift in Sources */,
 				76FF08402899703200633CE6 /* MonthlyGoalViewController.swift in Sources */,
 				760AE9A128B223AF006703B6 /* UITextFieldExtension.swift in Sources */,
+				7610E914291F9DCD009BE09E /* StartingViewController.swift in Sources */,
 				76A83D3928E046C600FC5B26 /* APIService.swift in Sources */,
+				7610E918291FA51C009BE09E /* CommonButtonView.swift in Sources */,
 				76D8C95328EADC47002A4B0E /* AddBillViewModel.swift in Sources */,
 				7682A9DB288EE33F008A1A50 /* AppDelegate.swift in Sources */,
 				76FF08422899707B00633CE6 /* MonthlyGoalPresenter.swift in Sources */,
