@@ -24,6 +24,7 @@ final class StartingViewController: UIViewController {
     private lazy var startButton: CommonButtonView = {
         let button = CommonButtonView()
         button.setTitle("시작하기", for: .normal)
+//        button.isEnabled = false
         return button
     }()
     
@@ -39,6 +40,7 @@ final class StartingViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
+        bindViewModel()
     }
 }
 
@@ -53,10 +55,26 @@ private extension StartingViewController {
         }
         
         startButton.snp.makeConstraints {
-//            $0.centerX.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(16)
-            $0.height.equalTo(32)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            $0.height.equalTo(48)
         }
+    }
+    
+    func bindViewModel() {
+        let input = StartingViewModel.Input(
+//            titleText: <#T##Observable<String>#>,
+//            targetAmountText: <#T##Observable<String>#>,
+            startButton: startButton.rx.tap.asObservable()
+        )
+        
+        let output = viewModel.transform(input: input)
+        
+        output.start
+            .subscribe(onNext: { [weak self] in
+                let billListVC = BillListViewController()
+                self?.navigationController?.pushViewController(billListVC, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }

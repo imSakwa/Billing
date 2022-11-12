@@ -72,9 +72,7 @@ private extension AddBillViewController {
         self.view.backgroundColor = .white
         
         [titleLabel, titleInputBox, dateInputBox, costInputBox, memoInputBox, enterButton]
-            .forEach {
-                self.view.addSubview($0)
-            }
+            .forEach { self.view.addSubview($0) }
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(36)
