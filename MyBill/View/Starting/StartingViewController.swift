@@ -116,6 +116,12 @@ private extension StartingViewController {
         
         let output = viewModel.transform(input: input)
         
+        output.buttonEnabled
+            .drive(onNext: { [weak self] in
+                self?.startButton.isEnabled = $0
+            })
+            .disposed(by: disposeBag)
+        
         output.start
             .subscribe(onNext: { [weak self] in
                 let billListVC = BillListViewController()
