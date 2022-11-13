@@ -19,9 +19,10 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
     
     private lazy var goalButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "icon_goal")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.setImage(UIImage(systemName: "gear"), for: .normal)
+        button.imageView?.contentMode = .scaleToFill
         button.addTarget(self, action: #selector(tapSettingButton), for: .touchUpInside)
-        button.tintColor = .buttonColor
+        button.tintColor = .black
         return button
     }()
     
@@ -52,8 +53,9 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
    
     private lazy var addButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "plus.rectangle"), for: .normal)
+        button.setImage(UIImage(named: "icon_plus")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.addTarget(self, action: #selector(tapAddButton), for: .touchUpInside)
+        button.tintColor = .black
         return button
     }()
     
@@ -94,8 +96,8 @@ private extension BillInfoCollectionHeaderView {
         }
         
         addButton.snp.makeConstraints {
-            $0.top.equalTo(goalButton.snp.bottom).offset(16)
-            $0.trailing.equalToSuperview().inset(16)
+            $0.top.equalTo(goalButton)
+            $0.trailing.equalTo(goalButton.snp.leading).offset(-12)
             $0.size.equalTo(24)
         }
     }

@@ -71,7 +71,6 @@ extension BillListPresenter: UICollectionViewDelegateFlowLayout {
 extension BillListPresenter: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > 0 && scrollView.contentOffset.y < 150 {
-            print(scrollView.contentOffset.y)
             // 네비게이션 뷰 좁아져야함
         }
     }
