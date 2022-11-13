@@ -20,8 +20,8 @@ protocol StartingViewModelType {
 
 final class StartingViewModel: StartingViewModelType {
     struct Input {
-//        let titleText: Observable<String>
-//        let targetAmountText: Observable<String>
+        let nameText: Observable<String>
+        let targetAmountText: Observable<String>
         let startButton: Observable<Void>
     }
     
