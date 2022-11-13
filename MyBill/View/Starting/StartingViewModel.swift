@@ -70,7 +70,13 @@ final class StartingViewModel: StartingViewModelType {
     
     func saveInputData() {
         let name = nameText.value
-        let targetAmount = targetAmountText.value
+        var targetAmount = targetAmountText.value
+        
+        let targetAmountInt = Int(targetAmount)!
+        let format = NumberFormatter()
+        format.numberStyle = .decimal
+        
+        targetAmount = format.string(from: targetAmountInt as NSNumber)!
         
         UserDefaults.standard.set(name, forKey: "name")
         UserDefaults.standard.set(targetAmount, forKey: "balance")

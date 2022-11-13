@@ -89,8 +89,14 @@ extension MonthlyGoalViewController: MonthlyGoalProtocol {
     func setMyGoal() {
         self.checkInputValue()
         
+        let goalPrice = Int(goalPriceView.inputTextField.text!)!
+        let numberFormat = NumberFormatter()
+        numberFormat.numberStyle = .decimal
+        
+        let balance = numberFormat.string(from: goalPrice as NSNumber)!
+        
         UserDefaults.standard.set(nameView.inputTextField.text, forKey: "name")
-        UserDefaults.standard.set(goalPriceView.inputTextField.text, forKey: "balance")
+        UserDefaults.standard.set(balance, forKey: "balance")
         
         completionHandler?()
         
