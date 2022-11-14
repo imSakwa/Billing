@@ -14,7 +14,7 @@ struct Bill: Codable, Hashable {
     let title: String
     let amount: Int
     let memo: String
-    let date: String
+    var date: String
 }
 
 struct BillList: Codable, Hashable {

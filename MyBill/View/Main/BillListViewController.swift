@@ -103,6 +103,8 @@ extension BillListViewController: BillListProtocol {
         // snapshot 생성
         var snapshot = NSDiffableDataSourceSnapshot<Info, Bill>()
 
+        sortList()
+        
         // snapshot에 data 추가
         snapshot.appendSections([info])
         snapshot.appendItems(billList)
@@ -155,7 +157,19 @@ private extension BillListViewController {
             billList.append(Bill(title: bill.title, amount: bill.amount, memo: bill.memo, date: bill.date))
         }
         configureSnapShot()
+    }
+    
+    /// 내림차순 정렬
+    func sortList() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
         
+        billList = billList.sorted { first, second in
+            let firstDate = dateFormatter.date(from: first.date)!
+            let secondDate = dateFormatter.date(from: second.date)!
+            
+            return firstDate.compare(secondDate) == .orderedDescending
+        }
     }
 }
 
@@ -178,9 +192,8 @@ extension BillListViewController: BillInfoHeaderDelegate {
         let addBillVC = AddBillViewController()
         addBillVC.delegate = self
         
-        // TODO: 추가 후 갱신
         present(addBillVC, animated: true) { [weak self] in
-            print("addBill close")
+            self?.getBillList()
         }
     }
 }
