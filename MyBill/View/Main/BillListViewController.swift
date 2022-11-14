@@ -13,6 +13,7 @@ import SnapKit
 final class BillListViewController: UIViewController {
     private lazy var presenter = BillListPresenter(viewController: self)
     private var dataSource: UICollectionViewDiffableDataSource<Info ,Bill>!
+    
     private var billList: [Bill] = []
     private var info: Info = Info(name: "", amount: "")
     let realm = try! Realm()
@@ -33,6 +34,7 @@ final class BillListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         presenter.viewDidLoad()
         readRealm()
     }
@@ -87,21 +89,21 @@ extension BillListViewController: BillListProtocol {
             
             sectionHeader.delegate = self
             sectionHeader.backgroundColor = .systemGray6
-            sectionHeader.nameLabel.text = self?.dataSource.snapshot().sectionIdentifiers[0].name
-            sectionHeader.balanceLabel.text = self?.dataSource.snapshot().sectionIdentifiers[0].amount
+            sectionHeader.setupHeader(info: (self?.dataSource.snapshot().sectionIdentifiers[0])!)
             
             return sectionHeader
          }
     }
     
     func configureSnapShot() {
+        let name = UserDefaults.standard.value(forKey: "name") as? String ?? ""
+        let amount = UserDefaults.standard.value(forKey: "amount") as? String ?? ""
+        self.info = Info(name: name, amount: amount)
+        
         // snapshot 생성
         var snapshot = NSDiffableDataSourceSnapshot<Info, Bill>()
 
         // snapshot에 data 추가
-        let name = UserDefaults.standard.value(forKey: "name") as? String ?? ""
-        let amount = UserDefaults.standard.value(forKey: "cost") as? String ?? ""
-        info = Info(name: name, amount: amount)
         snapshot.appendSections([info])
         snapshot.appendItems(billList)
 
@@ -135,7 +137,7 @@ private extension BillListViewController {
         for bill in data {
             let billObject = BillObject(
                 title: bill.title,
-                cost: bill.cost,
+                amount: bill.amount,
                 memo: bill.memo,
                 date: bill.date
             )
@@ -150,7 +152,7 @@ private extension BillListViewController {
         let billObject = realm.objects(BillObject.self)
         
         for bill in billObject {
-            billList.append(Bill(title: bill.title, cost: bill.cost, memo: bill.memo, date: bill.date))
+            billList.append(Bill(title: bill.title, amount: bill.amount, memo: bill.memo, date: bill.date))
         }
         configureSnapShot()
         
@@ -162,8 +164,6 @@ extension BillListViewController: BillInfoHeaderDelegate {
         let goalVC = MonthlyGoalViewController()
         goalVC.completionHandler = { [weak self] in
             
-            // TODO: billCollectionView 헤더 갱신해주기
-//            self?.dataSource.appl
             self?.configureSnapShot()
         }
         

@@ -21,7 +21,7 @@ final class AddBillViewModel: AddBillViewModelType {
     struct Input {
         let titleText: Observable<String>
         let dateText: Observable<Date>
-        let costText: Observable<String>
+        let amountText: Observable<String>
         let memoText: Observable<String>
         let enterButton: Observable<Void>
     }
@@ -34,7 +34,7 @@ final class AddBillViewModel: AddBillViewModelType {
     private let disposeBag = DisposeBag()
     private let titleText = BehaviorRelay(value: "")
     private let dateText = BehaviorRelay(value: "")
-    private let costText = BehaviorRelay(value: "0")
+    private let amountText = BehaviorRelay(value: "0")
     private let memoText = BehaviorRelay(value: "")
     private let enterButtonTap = PublishRelay<Void>()
     
@@ -54,10 +54,10 @@ final class AddBillViewModel: AddBillViewModelType {
             )
             .disposed(by: disposeBag)
         
-        input.costText
+        input.amountText
             .subscribe(
                 onNext: { [weak self] in
-                    self?.costText.accept($0)
+                    self?.amountText.accept($0)
                 }
             )
             .disposed(by: disposeBag)
@@ -81,7 +81,7 @@ final class AddBillViewModel: AddBillViewModelType {
         
         let validateEnterButton = Driver.combineLatest(
             titleText.asDriver(),
-            costText.asDriver(),
+            amountText.asDriver(),
             memoText.asDriver()
         ) {
             !$0.isEmpty && !$1.isEmpty && !$2.isEmpty
@@ -96,12 +96,12 @@ final class AddBillViewModel: AddBillViewModelType {
     private func clickEnterButton() {
         let titleValue = titleText.value
         let dateValue = dateText.value
-        let costValue = costText.value
+        let amountValue = amountText.value
         let memoValue = memoText.value
         
         let bill = Bill(
             title: titleValue,
-            cost: Int(costValue)!,
+            amount: Int(amountValue)!,
             memo: memoValue,
             date: dateValue
         )

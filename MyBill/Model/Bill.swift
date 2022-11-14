@@ -12,7 +12,7 @@ import RealmSwift
 struct Bill: Codable, Hashable {
 //    let id = UUID()
     let title: String
-    let cost: Int
+    let amount: Int
     let memo: String
     let date: String
 }
@@ -27,15 +27,15 @@ struct BillList: Codable, Hashable {
 
 class BillObject: Object {
     @Persisted var title: String
-    @Persisted var cost: Int
+    @Persisted var amount: Int
     @Persisted var memo: String
     @Persisted var date: String
     
-    convenience init(title: String, cost: Int, memo: String, date: String) {
+    convenience init(title: String, amount: Int, memo: String, date: String) {
         self.init()
         
         self.title = title
-        self.cost = cost
+        self.amount = amount
         self.memo = memo
         self.date = date
     }

@@ -26,7 +26,7 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
         return button
     }()
     
-    lazy var nameLabel: UILabel = {
+    private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.text = UserDefaults.standard.value(forKey: "name") as? String ?? "닉네임"
         label.font = .systemFont(ofSize: 28, weight: .medium)
@@ -34,9 +34,9 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
         return label
     }()
     
-    lazy var balanceLabel: UILabel = {
+    private lazy var targetAmountLabel: UILabel = {
         let label = UILabel()
-        label.text = "목표액 : " + (UserDefaults.standard.value(forKey: "balance") as? String ?? "0") + "원"
+        label.text = "목표액 : " + (UserDefaults.standard.value(forKey: "amount") as? String ?? "0") + "원"
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.textColor = .textColor
         return label
@@ -67,25 +67,30 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func setupHeader(info: Info) {
+        nameLabel.text = info.name
+        targetAmountLabel.text = "목표액 : " + (UserDefaults.standard.value(forKey: "amount") as? String ?? "0") + "원"
+    }
 }
 
 private extension BillInfoCollectionHeaderView {
     func setupLayout() {
-        [nameLabel, balanceLabel, conditionLabel, goalButton, addButton].forEach { self.addSubview($0) }
+        [nameLabel, targetAmountLabel, conditionLabel, goalButton, addButton].forEach { self.addSubview($0) }
         
         nameLabel.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide).offset(40)
             $0.leading.equalToSuperview().inset(16)
         }
         
-        balanceLabel.snp.makeConstraints {
+        targetAmountLabel.snp.makeConstraints {
             $0.leading.equalTo(nameLabel)
             $0.top.equalTo(nameLabel.snp.bottom).offset(8)
         }
         
         conditionLabel.snp.makeConstraints {
             $0.leading.equalTo(nameLabel)
-            $0.top.equalTo(balanceLabel.snp.bottom).offset(8)
+            $0.top.equalTo(targetAmountLabel.snp.bottom).offset(8)
         }
         
         goalButton.snp.makeConstraints {
@@ -106,7 +111,7 @@ private extension BillInfoCollectionHeaderView {
     }
     
     @objc func tapAddButton(_ sender: UIButton) {
-//        APIService.setBill(bill: Bill(title: "입력 제목", cost: 119119, memo: "입력 메모", date: "2022-10-02 15:00"))
+//        APIService.setBill(bill: Bill(title: "입력 제목", amount: 119119, memo: "입력 메모", date: "2022-10-02 15:00"))
         
         delegate?.tapAddButton()
     }

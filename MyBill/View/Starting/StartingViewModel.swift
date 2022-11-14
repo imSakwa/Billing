@@ -79,7 +79,7 @@ final class StartingViewModel: StartingViewModelType {
         targetAmount = format.string(from: targetAmountInt as NSNumber)!
         
         UserDefaults.standard.set(name, forKey: "name")
-        UserDefaults.standard.set(targetAmount, forKey: "balance")
+        UserDefaults.standard.set(targetAmount, forKey: "amount")
     }
     
 }

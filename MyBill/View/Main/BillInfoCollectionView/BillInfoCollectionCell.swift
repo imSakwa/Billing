@@ -18,7 +18,7 @@ final class BillInfoCollectionCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var costLabel: UILabel = {
+    private lazy var amountLabel: UILabel = {
         let label = UILabel()
         label.text = "금액: "
         label.font = .systemFont(ofSize: 16, weight: .medium)
@@ -58,8 +58,8 @@ final class BillInfoCollectionCell: UICollectionViewCell {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         
-        let costFormat = "금액: %@원"
-        costLabel.text = String(format: costFormat, (numberFormatter.string(from: bill.cost as NSNumber) ?? ""))
+        let amountFormat = "금액: %@원"
+        amountLabel.text = String(format: amountFormat, (numberFormatter.string(from: bill.amount as NSNumber) ?? ""))
         
         dateLabel.text = bill.date
         memoTextView.text = bill.memo
@@ -68,7 +68,7 @@ final class BillInfoCollectionCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        costLabel.text = "금액: "
+        amountLabel.text = "금액: "
         dateLabel.text = ""
         memoTextView.text = ""
     }
@@ -79,7 +79,7 @@ private extension BillInfoCollectionCell {
         self.layer.cornerRadius = 14
         self.layer.masksToBounds = true
         
-        [titleLabel, dateLabel, costLabel, memoTextView].forEach { contentView.addSubview($0) }
+        [titleLabel, dateLabel, amountLabel, memoTextView].forEach { contentView.addSubview($0) }
         
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(8)
@@ -91,14 +91,14 @@ private extension BillInfoCollectionCell {
             $0.trailing.equalToSuperview().inset(8)
         }
         
-        costLabel.snp.makeConstraints {
+        amountLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(4)
             $0.leading.equalTo(titleLabel)
             $0.trailing.greaterThanOrEqualToSuperview().inset(8)
         }
         
         memoTextView.snp.makeConstraints {
-            $0.top.equalTo(costLabel.snp.bottom)
+            $0.top.equalTo(amountLabel.snp.bottom)
             $0.leading.trailing.equalToSuperview().inset(2)
             $0.bottom.equalToSuperview().inset(8)
         }

@@ -36,7 +36,7 @@ final class AddBillViewController: UIViewController {
         return box
     }()
     
-    private lazy var costInputBox: SettingBoxView = {
+    private lazy var amountInputBox: SettingBoxView = {
         let box = SettingBoxView(title: "금액", boxType: .number)
         return box
     }()
@@ -71,7 +71,7 @@ private extension AddBillViewController {
     func setupView() {
         self.view.backgroundColor = .white
         
-        [titleLabel, titleInputBox, dateInputBox, costInputBox, memoInputBox, enterButton]
+        [titleLabel, titleInputBox, dateInputBox, amountInputBox, memoInputBox, enterButton]
             .forEach { self.view.addSubview($0) }
         
         titleLabel.snp.makeConstraints {
@@ -90,13 +90,13 @@ private extension AddBillViewController {
             $0.leading.trailing.equalTo(titleInputBox)
         }
         
-        costInputBox.snp.makeConstraints {
+        amountInputBox.snp.makeConstraints {
             $0.top.equalTo(dateInputBox.snp.bottom).offset(20)
             $0.leading.trailing.equalTo(titleInputBox)
         }
         
         memoInputBox.snp.makeConstraints {
-            $0.top.equalTo(costInputBox.snp.bottom).offset(20)
+            $0.top.equalTo(amountInputBox.snp.bottom).offset(20)
             $0.leading.trailing.equalTo(titleInputBox)
         }
         
@@ -111,7 +111,7 @@ private extension AddBillViewController {
         let input = AddBillViewModel.Input(
             titleText: titleInputBox.inputTextField.rx.text.orEmpty.asObservable(),
             dateText: dateInputBox.datePickerView.rx.date.asObservable(),
-            costText: costInputBox.inputTextField.rx.text.orEmpty.asObservable(),
+            amountText: amountInputBox.inputTextField.rx.text.orEmpty.asObservable(),
             memoText: memoInputBox.inputTextField.rx.text.orEmpty.asObservable(),
             enterButton: enterButton.rx.tap.asObservable()
         )
