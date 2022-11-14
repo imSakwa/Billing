@@ -26,7 +26,7 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
         return button
     }()
     
-    private lazy var nameLabel: UILabel = {
+    lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.text = UserDefaults.standard.value(forKey: "name") as? String ?? "닉네임"
         label.font = .systemFont(ofSize: 28, weight: .medium)
@@ -34,7 +34,7 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
         return label
     }()
     
-    private lazy var balanceLabel: UILabel = {
+    lazy var balanceLabel: UILabel = {
         let label = UILabel()
         label.text = "목표액 : " + (UserDefaults.standard.value(forKey: "balance") as? String ?? "0") + "원"
         label.font = .systemFont(ofSize: 24, weight: .bold)
@@ -42,7 +42,6 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
         return label
     }()
     
-    // TODO: 잔액을 범위로 나눠서 condtionLabel 넣어주기
     private lazy var conditionLabel: UILabel = {
         let label = UILabel()
         label.text = "파이팅🔥"

@@ -87,20 +87,22 @@ final class MonthlyGoalViewController: UIViewController {
 
 extension MonthlyGoalViewController: MonthlyGoalProtocol {
     func setMyGoal() {
-        self.checkInputValue()
+        if self.checkInputValue() {
+            let goalPrice = Int(goalPriceView.inputTextField.text ?? "0")!
+            let numberFormat = NumberFormatter()
+            numberFormat.numberStyle = .decimal
+            
+            let balance = numberFormat.string(from: goalPrice as NSNumber)!
+            
+            UserDefaults.standard.set(nameView.inputTextField.text, forKey: "name")
+            UserDefaults.standard.set(balance, forKey: "balance")
+            
+            completionHandler?()
+            
+            self.navigationController?.popViewController(animated: true)
+        }
         
-        let goalPrice = Int(goalPriceView.inputTextField.text!)!
-        let numberFormat = NumberFormatter()
-        numberFormat.numberStyle = .decimal
         
-        let balance = numberFormat.string(from: goalPrice as NSNumber)!
-        
-        UserDefaults.standard.set(nameView.inputTextField.text, forKey: "name")
-        UserDefaults.standard.set(balance, forKey: "balance")
-        
-        completionHandler?()
-        
-        self.navigationController?.popViewController(animated: true)
     }
     
     func setupNavigationBar() {
@@ -185,8 +187,10 @@ private extension MonthlyGoalViewController {
     }
     
     /// 입력 내용 체크 메서드
-    func checkInputValue() {
-        guard let goalPriceValue =  goalPriceView.inputTextField.text, Int(goalPriceValue) == 0 else { return }
+    func checkInputValue() -> Bool {
+        guard let goalPriceValue = goalPriceView.inputTextField.text,
+                goalPriceValue == ""
+        else { return true }
         
         let alertController = UIAlertController(
             title: nil,
@@ -200,6 +204,7 @@ private extension MonthlyGoalViewController {
         alertController.addAction(okAction)
         
         self.present(alertController, animated: true)
+        return false
     }
 }
 

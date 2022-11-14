@@ -12,8 +12,9 @@ import SnapKit
 
 final class BillListViewController: UIViewController {
     private lazy var presenter = BillListPresenter(viewController: self)
-    private var dataSource: UICollectionViewDiffableDataSource<Int ,Bill>!
+    private var dataSource: UICollectionViewDiffableDataSource<Info ,Bill>!
     private var billList: [Bill] = []
+    private var info: Info = Info(name: "", amount: "")
     let realm = try! Realm()
         
     private lazy var billCollectionView: UICollectionView = {
@@ -62,41 +63,51 @@ extension BillListViewController: BillListProtocol {
     
     func configureCollectionDataSource() {
         dataSource = UICollectionViewDiffableDataSource(collectionView: billCollectionView) { [weak self] collectionView, indexPath, itemIdentifier -> UICollectionViewCell? in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BillInfoCollectionCell.identifier, for: indexPath) as? BillInfoCollectionCell else { return UICollectionViewCell() }
+            
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: BillInfoCollectionCell.identifier,
+                for: indexPath
+            ) as? BillInfoCollectionCell else { return UICollectionViewCell() }
             
             cell.backgroundColor = .systemGray3
             cell.layer.borderColor = UIColor.systemGray.cgColor
             cell.layer.borderWidth = 1
             cell.setupCell(bill: (self?.billList[indexPath.row])!)
+            
             return cell
         }
         
-        dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) in
+        dataSource.supplementaryViewProvider = { [weak self] (collectionView, kind, indexPath) in
+            
             guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
                 ofKind: UICollectionView.elementKindSectionHeader,
                 withReuseIdentifier: BillInfoCollectionHeaderView.identifier,
                 for: indexPath
-            ) as? BillInfoCollectionHeaderView else {
-                fatalError("Could not dequeue sectionHeader: \(BillInfoCollectionHeaderView.identifier)")
-            }
+            ) as? BillInfoCollectionHeaderView else { fatalError() }
+            
             sectionHeader.delegate = self
             sectionHeader.backgroundColor = .systemGray6
+            sectionHeader.nameLabel.text = self?.dataSource.snapshot().sectionIdentifiers[0].name
+            sectionHeader.balanceLabel.text = self?.dataSource.snapshot().sectionIdentifiers[0].amount
+            
             return sectionHeader
          }
     }
     
     func configureSnapShot() {
         // snapshot 생성
-        var snapshot = NSDiffableDataSourceSnapshot<Int, Bill>()
+        var snapshot = NSDiffableDataSourceSnapshot<Info, Bill>()
 
         // snapshot에 data 추가
-        snapshot.appendSections([0])
+        let name = UserDefaults.standard.value(forKey: "name") as? String ?? ""
+        let amount = UserDefaults.standard.value(forKey: "cost") as? String ?? ""
+        info = Info(name: name, amount: amount)
+        snapshot.appendSections([info])
         snapshot.appendItems(billList)
 
         // snapshot 반영
         dataSource.apply(snapshot, animatingDifferences: true)
     }
-
 }
 
 private extension BillListViewController {
@@ -149,10 +160,11 @@ private extension BillListViewController {
 extension BillListViewController: BillInfoHeaderDelegate {
     func tapSettingButton() {
         let goalVC = MonthlyGoalViewController()
-        goalVC.completionHandler = {
+        goalVC.completionHandler = { [weak self] in
             
             // TODO: billCollectionView 헤더 갱신해주기
-            
+//            self?.dataSource.appl
+            self?.configureSnapShot()
         }
         
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
@@ -166,6 +178,7 @@ extension BillListViewController: BillInfoHeaderDelegate {
         let addBillVC = AddBillViewController()
         addBillVC.delegate = self
         
+        // TODO: 추가 후 갱신
         present(addBillVC, animated: true) { [weak self] in
             print("addBill close")
         }

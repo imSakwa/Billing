@@ -40,3 +40,8 @@ class BillObject: Object {
         self.date = date
     }
 }
+
+struct Info: Hashable {
+    let name: String
+    let amount: String
+}
