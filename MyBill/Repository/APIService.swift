@@ -12,9 +12,9 @@ import FirebaseFirestore
 
 final class APIService {
     
-    static func getBillList(completion: @escaping (Result<[Bill], Error>) -> Void) {
+    static func getBillList(uuid: String, completion: @escaping (Result<[Bill], Error>) -> Void) {
         var billArr: [Bill] = []
-        let documentListener = Firestore.firestore().collection("BillList").document("Bill")
+        let documentListener = Firestore.firestore().collection("BillList").document("\(uuid)")
         
         documentListener.getDocument { (snapshot, error) in
             if error != nil {
@@ -23,7 +23,9 @@ final class APIService {
             guard let snapshot = snapshot else { return }
             
             do {
-                for billList in (snapshot.data()?["bill"] as! [[String:Any]]) {
+                guard let bill = snapshot.data()?["bill"] as? [[String:Any]] else { return }
+                
+                for billList in bill {
                     let billData = try JSONSerialization.data(withJSONObject: billList)
                     let bill = try JSONDecoder().decode(Bill.self, from: billData)
                     billArr.append(bill)
@@ -35,9 +37,9 @@ final class APIService {
         }
     }
     
-    static func setBill(bill: Bill, completion: (Error?) -> Void) {
+    static func setBill(bill: Bill, uuid: String , completion: (Error?) -> Void) {
         var billArr: [Bill] = []
-        let documentListener = Firestore.firestore().collection("BillList").document("Bill")
+        let documentListener = Firestore.firestore().collection("BillList").document("\(uuid)")
         
         documentListener.getDocument { (snapshot, error) in
             if error != nil {
@@ -45,19 +47,26 @@ final class APIService {
             }
             guard let snapshot = snapshot else { return }
             
-            do {
-                for billList in (snapshot.data()?["bill"] as! [[String:Any]]) {
-                    let billData = try JSONSerialization.data(withJSONObject: billList)
-                    let bill = try JSONDecoder().decode(Bill.self, from: billData)
-                    billArr.append(bill)
+            if let billListData = snapshot.data()?["bill"] as? [[String:Any]] {
+                
+                do {
+                    for billList in billListData {
+                        let billData = try JSONSerialization.data(withJSONObject: billList)
+                        let bill = try JSONDecoder().decode(Bill.self, from: billData)
+                        billArr.append(bill)
+                        
+                    }
+                } catch {
+                    print("changmin - \(error.localizedDescription)")
                 }
-            } catch {
-                print("changmin - \(error.localizedDescription)")
+                billArr.append(bill)
+                
+                let billList = BillList(billList: billArr)
+                try! documentListener.setData(from: billList)
+                
+            } else {
+                try! documentListener.setData(from: BillList(billList: [bill]))
             }
-            billArr.append(bill)
-            
-            let billList = BillList(billList: billArr)
-            try! documentListener.setData(from: billList)
         }
     }
 }

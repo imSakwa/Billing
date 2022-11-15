@@ -18,6 +18,14 @@ protocol AddBillViewModelType {
 }
 
 final class AddBillViewModel: AddBillViewModelType {
+    private let disposeBag = DisposeBag()
+    private let titleText = BehaviorRelay(value: "")
+    private let dateText = BehaviorRelay(value: "")
+    private let amountText = BehaviorRelay(value: "0")
+    private let memoText = BehaviorRelay(value: "")
+    private let enterButtonTap = PublishRelay<Void>()
+    var uuid: String = ""
+    
     struct Input {
         let titleText: Observable<String>
         let dateText: Observable<Date>
@@ -30,13 +38,6 @@ final class AddBillViewModel: AddBillViewModelType {
         let isEnterEnabled: Driver<Bool>
         let addBill: Observable<Void>
     }
-    
-    private let disposeBag = DisposeBag()
-    private let titleText = BehaviorRelay(value: "")
-    private let dateText = BehaviorRelay(value: "")
-    private let amountText = BehaviorRelay(value: "0")
-    private let memoText = BehaviorRelay(value: "")
-    private let enterButtonTap = PublishRelay<Void>()
     
     func transform(input: Input) -> Output {
         input.titleText
@@ -106,7 +107,7 @@ final class AddBillViewModel: AddBillViewModelType {
             date: dateValue
         )
         
-        APIService.setBill(bill: bill) { error in
+        APIService.setBill(bill: bill, uuid: uuid) { error in
             if let error = error {
                 print(error.localizedDescription)
             }

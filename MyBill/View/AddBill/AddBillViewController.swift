@@ -54,6 +54,7 @@ final class AddBillViewController: UIViewController {
     
     init(viewModel: AddBillViewModel = AddBillViewModel()) {
         self.viewModel = viewModel
+        self.viewModel.uuid = UIDevice.current.identifierForVendor!.uuidString
         super.init(nibName: nil, bundle: nil)
         
     }

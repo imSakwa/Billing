@@ -116,7 +116,9 @@ extension BillListViewController: BillListProtocol {
 
 private extension BillListViewController {
     func getBillList() {
-        APIService.getBillList() { [weak self] result in
+        let uuid = UIDevice.current.identifierForVendor!.uuidString
+        
+        APIService.getBillList(uuid: uuid) { [weak self] result in
             switch result {
             case .success(let data):
                 AppDelegate().NSLog("%@", data)
