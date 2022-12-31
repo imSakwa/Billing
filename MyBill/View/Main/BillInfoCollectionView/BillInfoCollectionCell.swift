@@ -48,9 +48,7 @@ final class BillInfoCollectionCell: UICollectionViewCell {
         setupView()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder: NSCoder) { fatalError() }
     
     func setupCell(bill: Bill) {
         titleLabel.text = bill.title
@@ -76,8 +74,8 @@ final class BillInfoCollectionCell: UICollectionViewCell {
 
 private extension BillInfoCollectionCell {
     func setupView() {
-        self.layer.cornerRadius = 14
-        self.layer.masksToBounds = true
+        layer.cornerRadius = 14
+        layer.masksToBounds = true
         
         [titleLabel, dateLabel, amountLabel, memoTextView].forEach { contentView.addSubview($0) }
         

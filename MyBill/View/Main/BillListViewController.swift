@@ -49,7 +49,7 @@ final class BillListViewController: UIViewController {
 
 extension BillListViewController: BillListProtocol {
     func setupNavigationBar() {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.setNavigationBarHidden(true, animated: false)
          
         view.backgroundColor = .systemGray6
     }

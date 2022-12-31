@@ -81,7 +81,7 @@ final class MonthlyGoalViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
 }
 
@@ -99,7 +99,7 @@ extension MonthlyGoalViewController: MonthlyGoalProtocol {
             
             completionHandler?()
             
-            self.navigationController?.popViewController(animated: true)
+            navigationController?.popViewController(animated: true)
         }
         
         
@@ -107,9 +107,9 @@ extension MonthlyGoalViewController: MonthlyGoalProtocol {
     
     func setupNavigationBar() {
         view.backgroundColor = .systemBackground
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.setNavigationBarHidden(false, animated: true)
         
-        self.navigationItem.rightBarButtonItem = settingButton
+        navigationItem.rightBarButtonItem = settingButton
     }
     
     func setupObserver() {
@@ -117,7 +117,7 @@ extension MonthlyGoalViewController: MonthlyGoalProtocol {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapViewForHideKeyboard))
-        self.view.addGestureRecognizer(tapGesture)
+        view.addGestureRecognizer(tapGesture)
     }
     
     func setupLayout() {
@@ -154,7 +154,7 @@ extension MonthlyGoalViewController: MonthlyGoalProtocol {
     }
     
     func setShouldReturn() {
-        self.view.endEditing(true)
+        view.endEditing(true)
     }
     
     func setDidEndEditing(textField: UITextField) {
@@ -170,12 +170,12 @@ extension MonthlyGoalViewController: MonthlyGoalProtocol {
 
 private extension MonthlyGoalViewController {
     @objc func keyboardWillShow() {
-        self.view.frame.origin.y = 0
-        self.view.frame.origin.y -= 30
+        view.frame.origin.y = 0
+        view.frame.origin.y -= 30
     }
     
     @objc func keyboardWillHide() {
-        self.view.frame.origin.y = 0
+        view.frame.origin.y = 0
     }
     
     @objc func tapEnterButton() {
@@ -183,7 +183,7 @@ private extension MonthlyGoalViewController {
     }
     
     @objc func tapViewForHideKeyboard() {
-        self.view.endEditing(true)
+        view.endEditing(true)
     }
     
     /// 입력 내용 체크 메서드
@@ -203,7 +203,7 @@ private extension MonthlyGoalViewController {
         
         alertController.addAction(okAction)
         
-        self.present(alertController, animated: true)
+        present(alertController, animated: true)
         return false
     }
 }

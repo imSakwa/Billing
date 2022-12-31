@@ -70,10 +70,10 @@ final class AddBillViewController: UIViewController {
 
 private extension AddBillViewController {
     func setupView() {
-        self.view.backgroundColor = .white
+        view.backgroundColor = .white
         
         [titleLabel, titleInputBox, dateInputBox, amountInputBox, memoInputBox, enterButton]
-            .forEach { self.view.addSubview($0) }
+            .forEach { view.addSubview($0) }
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(36)

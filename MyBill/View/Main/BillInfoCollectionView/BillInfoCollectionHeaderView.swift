@@ -64,9 +64,7 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
         setupLayout()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder: NSCoder) { fatalError() }
     
     func setupHeader(info: Info) {
         nameLabel.text = info.name
@@ -76,10 +74,10 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
 
 private extension BillInfoCollectionHeaderView {
     func setupLayout() {
-        [nameLabel, targetAmountLabel, conditionLabel, goalButton, addButton].forEach { self.addSubview($0) }
+        [nameLabel, targetAmountLabel, conditionLabel, goalButton, addButton].forEach { addSubview($0) }
         
         nameLabel.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide).offset(40)
+            $0.top.equalTo(safeAreaLayoutGuide).offset(40)
             $0.leading.equalToSuperview().inset(16)
         }
         
@@ -94,7 +92,7 @@ private extension BillInfoCollectionHeaderView {
         }
         
         goalButton.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide).offset(16)
+            $0.top.equalTo(safeAreaLayoutGuide).offset(16)
             $0.trailing.equalToSuperview().inset(16)
             $0.size.equalTo(24)
         }

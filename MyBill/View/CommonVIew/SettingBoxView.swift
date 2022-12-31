@@ -47,35 +47,33 @@ final class SettingBoxView: UIView {
     init(title: String, boxType: BoxType) {
         super.init(frame: .zero)
         
-        self.backgroundColor = .secondarySystemBackground
-        self.layer.borderColor = UIColor.systemGray.cgColor
-        self.layer.borderWidth = 1
-        self.layer.cornerRadius = 10
+        backgroundColor = .secondarySystemBackground
+        layer.borderColor = UIColor.systemGray.cgColor
+        layer.borderWidth = 1
+        layer.cornerRadius = 10
         
-        self.titleLabel.text = title
+        titleLabel.text = title
         self.boxType = boxType
         
         setupView()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder: NSCoder) { fatalError() }
 }
 
 private extension SettingBoxView {
     func setupView() {
         switch boxType {
         case .text:
-            self.inputTextField.keyboardType = .default
+            inputTextField.keyboardType = .default
             
         case .number:
-            self.inputTextField.keyboardType = .numberPad
-            self.inputTextField.addDoneButtonOnKeyboard()
+            inputTextField.keyboardType = .numberPad
+            inputTextField.addDoneButtonOnKeyboard()
             
         case .date:
-            self.inputTextField.isHidden = true
-            self.datePickerView.isHidden = false
+            inputTextField.isHidden = true
+            datePickerView.isHidden = false
         }
         
         [titleLabel, inputTextField, datePickerView].forEach { addSubview($0) }
