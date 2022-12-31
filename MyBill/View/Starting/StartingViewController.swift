@@ -41,7 +41,8 @@ final class StartingViewController: UIViewController {
     }()
     
     private lazy var targetAmountTextField: SettingBoxView = {
-        let box = SettingBoxView(title: "목표액", boxType: .text)
+        let box = SettingBoxView(title: "목표액", boxType: .number)
+        box.inputTextField.delegate = self
         return box
     }()
     
@@ -133,8 +134,53 @@ private extension StartingViewController {
     func setAttributeToLabel() {
         let fontSize: UIFont = .systemFont(ofSize: 17)
         let attributeStr = NSMutableAttributedString(string: welcomeLabel.text!)
-        attributeStr.addAttribute(.font, value: fontSize, range: (welcomeLabel.text! as NSString).range(of: "등록 후 언제든지 설정에서 변경 가능합니다."))
+        attributeStr.addAttribute(
+            .font,
+            value: fontSize,
+            range: (welcomeLabel.text! as NSString).range(of: "등록 후 언제든지 설정에서 변경 가능합니다.")
+        )
 
         welcomeLabel.attributedText = attributeStr
+    }
+}
+
+extension StartingViewController: UITextFieldDelegate {
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+        
+        let format = NumberFormatter()
+        format.numberStyle = .decimal
+        format.locale = .current
+        format.maximumFractionDigits = 0
+        
+        if textField.text?.first == "0" && textField.text == "" {
+            return false
+            
+        } else {
+            
+            if let removeAllSeperator = textField.text?.replacingOccurrences(of: ",", with: "") {
+                
+                let beforeFormattedString = removeAllSeperator + string
+                
+                if format.number(from: string) != nil {
+                    // 입력 시
+                    let targetAmountInt = Int(beforeFormattedString)!
+                    textField.text = format.string(from: targetAmountInt as NSNumber) ?? "0"
+                    
+                    return false
+                    
+                } else {
+                    // 삭제 시
+                    let targetAmountInt = Int(String(beforeFormattedString.dropLast()))!
+                    textField.text = format.string(from: targetAmountInt as NSNumber) ?? "0"
+                    
+                    return false
+                }
+            }
+            return true
+        }
     }
 }
