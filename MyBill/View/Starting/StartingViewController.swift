@@ -23,7 +23,7 @@ final class StartingViewController: UIViewController {
     }()
     
     private lazy var welcomeLabel: UILabel = {
-        let label = UILabel()
+        let label = UILabel(frame: .zero)
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 20)
         label.text = """

@@ -32,6 +32,12 @@ final class BillListViewController: UIViewController {
         return collectionView
     }()
     
+    private lazy var emptyImageView: UIImageView = {
+        let imageView = UIImageView(frame: .zero)
+        imageView.backgroundColor = .red
+        return imageView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,11 +61,15 @@ extension BillListViewController: BillListProtocol {
     }
     
     func setupLayout() {
-        [billCollectionView].forEach { view.addSubview($0) }
+        [billCollectionView, emptyImageView].forEach { view.addSubview($0) }
                 
         billCollectionView.snp.makeConstraints {
             $0.top.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
+        }
+        
+        emptyImageView.snp.makeConstraints {
+            $0.edges.equalTo(billCollectionView)
         }
     }
     
@@ -134,7 +144,7 @@ private extension BillListViewController {
     }
     
     func createRealm(data: [Bill]) {
-        try! realm.write {
+        try! realm.write { 
             realm.deleteAll()
         }
         

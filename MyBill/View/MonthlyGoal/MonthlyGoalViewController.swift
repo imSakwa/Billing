@@ -19,14 +19,14 @@ final class MonthlyGoalViewController: UIViewController {
     }()
     
     private let titleLabel: UILabel = {
-        let label = UILabel()
+        let label = UILabel(frame: .zero)
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.text = "닉네임 & 목표액 변경하기"
         return label
     }()
     
     private let descriptionTextView: UITextView = {
-        let textView = UITextView()
+        let textView = UITextView(frame: .zero)
         textView.font = .systemFont(ofSize: 16, weight: .medium)
         textView.isEditable = false
         textView.text =

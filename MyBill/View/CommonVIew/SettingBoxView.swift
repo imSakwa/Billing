@@ -18,7 +18,7 @@ final class SettingBoxView: UIView {
     private var boxType: BoxType = .text
     
     private lazy var titleLabel: UILabel = {
-        let label = UILabel()
+        let label = UILabel(frame: .zero)
         label.text = "닉네임"
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textColor = .systemGray
@@ -26,13 +26,13 @@ final class SettingBoxView: UIView {
     }()
     
     private(set) lazy var inputTextField: UITextField = {
-        let textField = UITextField()
+        let textField = UITextField(frame: .zero)
         textField.clearButtonMode = .whileEditing
         return textField
     }()
     
     private(set) lazy var datePickerView: UIDatePicker = {
-        let datePicker = UIDatePicker()
+        let datePicker = UIDatePicker(frame: .zero)
         datePicker.isHidden = true
         datePicker.datePickerMode = .dateAndTime
         return datePicker

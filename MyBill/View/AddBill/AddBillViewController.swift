@@ -21,7 +21,7 @@ final class AddBillViewController: UIViewController {
     let disposeBag = DisposeBag()
     
     private let titleLabel: UILabel = {
-        let label = UILabel()
+        let label = UILabel(frame: .zero)
         label.text = "사용한 금액을 입력해주세요."
         return label
     }()
