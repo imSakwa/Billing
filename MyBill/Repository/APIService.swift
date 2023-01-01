@@ -9,6 +9,13 @@ import Foundation
 import FirebaseFirestoreSwift
 import FirebaseFirestore
 
+enum APIError: Error {
+    case failToGetList
+    case failToUnwrapping
+    case failToDecoding
+    case failToSetList
+}
+
 
 final class APIService {
     
@@ -18,12 +25,16 @@ final class APIService {
         
         documentListener.getDocument { (snapshot, error) in
             if error != nil {
-                completion(.failure(error!))
+                completion(.failure(APIError.failToGetList))
             }
-            guard let snapshot = snapshot else { return }
+            guard let snapshot = snapshot else {
+                return completion(.failure(APIError.failToUnwrapping))
+            }
             
             do {
-                guard let bill = snapshot.data()?["bill"] as? [[String:Any]] else { return }
+                guard let bill = snapshot.data()?["bill"] as? [[String:Any]] else {
+                    return completion(.failure(APIError.failToUnwrapping))
+                }
                 
                 for billList in bill {
                     let billData = try JSONSerialization.data(withJSONObject: billList)
@@ -31,7 +42,7 @@ final class APIService {
                     billArr.append(bill)
                 }
             } catch {
-                print("changmin - \(error.localizedDescription)")
+                completion(.failure(APIError.failToDecoding))
             }
             completion(.success(billArr))
         }
