@@ -21,7 +21,7 @@ final class MonthlyGoalViewController: UIViewController {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 24, weight: .bold)
-        label.text = "나만의 목표 금액 설정"
+        label.text = "닉네임 & 목표액 변경하기"
         return label
     }()
     
@@ -31,11 +31,8 @@ final class MonthlyGoalViewController: UIViewController {
         textView.isEditable = false
         textView.text =
             """
-            매달 자신의 목표 금액을 입력 해봐요!
-            간단한 메모를 통해서 스스로에게 응원도 해봐요!
-            
-            닉네임은 매번 수정 가능하지만
-            목표액은 매월 1일에 가능합니다👍
+            본인의 목표액을 수정해봐요.
+            이미 등록된 내역들 기준으로 차감된 목표액이 보입니다!
             """
         textView.sizeToFit()
         return textView
@@ -55,11 +52,11 @@ final class MonthlyGoalViewController: UIViewController {
         return view
     }()
     
-    private lazy var memoView: SettingBoxView = {
-        let view = SettingBoxView(title: "메모(최대 30자)", boxType: .text)
-        view.inputTextField.delegate = presenter
-        return view
-    }()
+//    private lazy var memoView: SettingBoxView = {
+//        let view = SettingBoxView(title: "메모(최대 30자)", boxType: .text)
+//        view.inputTextField.delegate = presenter
+//        return view
+//    }()
     
     private lazy var textfieldAccessoryView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
@@ -159,7 +156,8 @@ extension MonthlyGoalViewController: MonthlyGoalProtocol {
     
     func setDidEndEditing(textField: UITextField) {
         if textField == goalPriceView.inputTextField {
-            checkInputValue()
+            // FIXME: 버튼 활성화 로직 수정
+            enterButton.isEnabled = checkInputValue()
         }
         
         if textField == nameView.inputTextField {

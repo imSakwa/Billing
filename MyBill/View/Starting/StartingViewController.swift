@@ -27,8 +27,7 @@ final class StartingViewController: UIViewController {
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 20)
         label.text = """
-                     시작하기 위해 사용하실 닉네임과
-                     절약 목표액을 입력하신 후
+                     닉네임과 절약 목표액을 입력하신 후
                      시작버튼을 눌러주세요.
                      등록 후 언제든지 설정에서 변경 가능합니다.
                      """
@@ -90,13 +89,12 @@ private extension StartingViewController {
         }
         
         nameTextField.snp.makeConstraints {
-            $0.top.greaterThanOrEqualTo(welcomeLabel.snp.bottom).offset(20)
+            $0.top.equalTo(welcomeLabel.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(24)
-            $0.bottom.equalTo(view.snp.centerY).offset(-10)
         }
         
         targetAmountTextField.snp.makeConstraints {
-            $0.top.equalTo(view.snp.centerY).offset(10)
+            $0.top.equalTo(nameTextField.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(24)
         }
         
