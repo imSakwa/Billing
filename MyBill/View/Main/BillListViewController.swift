@@ -35,6 +35,7 @@ final class BillListViewController: UIViewController {
     private lazy var emptyImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.backgroundColor = .red
+        imageView.isHidden = true
         return imageView
     }()
     
@@ -69,7 +70,9 @@ extension BillListViewController: BillListProtocol {
         }
         
         emptyImageView.snp.makeConstraints {
-            $0.edges.equalTo(billCollectionView)
+            $0.leading.trailing.bottom.equalTo(billCollectionView)
+            let height = UIScreen.main.bounds.height
+            $0.top.equalTo(billCollectionView).offset(height/5)
         }
     }
     
@@ -106,6 +109,10 @@ extension BillListViewController: BillListProtocol {
     }
     
     func configureSnapShot() {
+        if billList.count == 0 {
+            emptyImageView.isHidden = false
+        }
+        
         let name = UserDefaults.standard.value(forKey: "name") as? String ?? ""
         let amount = UserDefaults.standard.value(forKey: "amount") as? String ?? ""
         self.info = Info(name: name, amount: amount)
@@ -144,7 +151,7 @@ private extension BillListViewController {
     }
     
     func createRealm(data: [Bill]) {
-        try! realm.write { 
+        try! realm.write {
             realm.deleteAll()
         }
         

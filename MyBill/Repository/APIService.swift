@@ -33,7 +33,7 @@ final class APIService {
             
             do {
                 guard let bill = snapshot.data()?["bill"] as? [[String:Any]] else {
-                    return completion(.failure(APIError.failToUnwrapping))
+                    return completion(.success([]))
                 }
                 
                 for billList in bill {
