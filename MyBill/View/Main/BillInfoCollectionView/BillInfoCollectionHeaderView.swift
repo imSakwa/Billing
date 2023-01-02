@@ -18,7 +18,7 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
     var delegate: BillInfoHeaderDelegate?
     
     private lazy var goalButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(frame: .zero)
         button.setImage(UIImage(systemName: "gear"), for: .normal)
         button.imageView?.contentMode = .scaleToFill
         button.addTarget(self, action: #selector(tapSettingButton), for: .touchUpInside)
@@ -27,7 +27,7 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
     }()
     
     private lazy var nameLabel: UILabel = {
-        let label = UILabel()
+        let label = UILabel(frame: .zero)
         label.text = UserDefaults.standard.value(forKey: "name") as? String ?? "닉네임"
         label.font = .systemFont(ofSize: 28, weight: .medium)
         label.textColor = .textColor
@@ -35,7 +35,7 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
     }()
     
     private lazy var targetAmountLabel: UILabel = {
-        let label = UILabel()
+        let label = UILabel(frame: .zero)
         label.text = "목표액 : " + (UserDefaults.standard.value(forKey: "amount") as? String ?? "0") + "원"
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.textColor = .textColor
@@ -43,7 +43,7 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
     }()
     
     private lazy var conditionLabel: UILabel = {
-        let label = UILabel()
+        let label = UILabel(frame: .zero)
         label.text = "파이팅🔥"
         label.font = .systemFont(ofSize: 20, weight: .medium)
         label.textColor = .textColor
@@ -51,8 +51,8 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
     }()
    
     private lazy var addButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "icon_plus")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        let button = UIButton(frame: .zero)
+        button.setImage(UIImage(systemName: "note.text.badge.plus"), for: .normal)
         button.addTarget(self, action: #selector(tapAddButton), for: .touchUpInside)
         button.tintColor = .black
         return button

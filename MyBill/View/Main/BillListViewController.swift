@@ -109,9 +109,7 @@ extension BillListViewController: BillListProtocol {
     }
     
     func configureSnapShot() {
-        if billList.count == 0 {
-            emptyImageView.isHidden = false
-        }
+        emptyImageView.isHidden = billList.count == 0 ? false : true
         
         let name = UserDefaults.standard.value(forKey: "name") as? String ?? ""
         let amount = UserDefaults.standard.value(forKey: "amount") as? String ?? ""
