@@ -51,7 +51,6 @@ final class BillListViewController: UIViewController {
         
         getBillList()
     }
-    
 }
 
 extension BillListViewController: BillListProtocol {

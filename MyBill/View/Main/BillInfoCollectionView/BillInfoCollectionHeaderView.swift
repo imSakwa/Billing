@@ -5,8 +5,9 @@
 //  Created by ChangMin on 2022/08/14.
 //
 
-import SnapKit
 import UIKit
+
+import SnapKit
 
 protocol BillInfoHeaderDelegate {
     func tapSettingButton()
@@ -19,7 +20,7 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
     
     private lazy var goalButton: UIButton = {
         let button = UIButton(frame: .zero)
-        button.setImage(UIImage(systemName: "gear"), for: .normal)
+        button.setImage(UIImage(systemName: "gearshape"), for: .normal)
         button.imageView?.contentMode = .scaleToFill
         button.addTarget(self, action: #selector(tapSettingButton), for: .touchUpInside)
         button.tintColor = .black
