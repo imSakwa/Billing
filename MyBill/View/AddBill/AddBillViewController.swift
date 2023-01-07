@@ -66,6 +66,14 @@ final class AddBillViewController: UIViewController {
         setupView()
         bindViewModel()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+}
+
+extension AddBillViewController: UITextFieldDelegate {
 }
 
 private extension AddBillViewController {
