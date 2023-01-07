@@ -193,7 +193,6 @@ extension BillListViewController: BillInfoHeaderDelegate {
     func tapSettingButton() {
         let goalVC = MonthlyGoalViewController()
         goalVC.completionHandler = { [weak self] in
-            
             self?.configureSnapShot()
         }
         
@@ -206,11 +205,16 @@ extension BillListViewController: BillInfoHeaderDelegate {
     
     func tapAddButton() {
         let addBillVC = AddBillViewController()
-        addBillVC.delegate = self
-        
-        present(addBillVC, animated: true) { [weak self] in
+        addBillVC.modalPresentationStyle = .fullScreen
+        addBillVC.completionHandler = { [weak self] in
             self?.getBillList()
         }
+        
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = .buttonColor
+        navigationItem.backBarButtonItem = backBarButtonItem
+        
+        navigationController?.pushViewController(addBillVC, animated: true)
     }
 }
 

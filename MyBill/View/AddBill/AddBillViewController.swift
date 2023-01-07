@@ -16,9 +16,9 @@ protocol AddBillDelegate {
 }
 
 final class AddBillViewController: UIViewController {
-    var viewModel: AddBillViewModel
-    var delegate: AddBillDelegate?
-    let disposeBag = DisposeBag()
+    private var viewModel: AddBillViewModel
+    private let disposeBag = DisposeBag()
+    var completionHandler: (() -> Void)?
     
     private let titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
@@ -71,6 +71,7 @@ final class AddBillViewController: UIViewController {
 private extension AddBillViewController {
     func setupView() {
         view.backgroundColor = .white
+        navigationController?.setNavigationBarHidden(false, animated: true)
         
         [titleLabel, titleInputBox, dateInputBox, amountInputBox, memoInputBox, enterButton]
             .forEach { view.addSubview($0) }
@@ -131,9 +132,8 @@ private extension AddBillViewController {
         output.addBill
             .subscribe(
                 onNext: { [weak self] in
-                    self?.dismiss(animated: true) { [weak self] in
-                        self?.delegate?.updateBillList()
-                    }
+                    self?.completionHandler?()
+                    self?.dismiss(animated: true)
                 }
             )
             .disposed(by: disposeBag)
