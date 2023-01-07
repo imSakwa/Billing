@@ -36,6 +36,7 @@ final class BillInfoCollectionCell: UICollectionViewCell {
     private lazy var memoTextView: UITextView = {
         let textView = UITextView(frame: .zero)
         textView.backgroundColor = .clear
+        textView.isEditable = false
         textView.font = .systemFont(ofSize: 16, weight: .regular)
         textView.textColor = .textColor
         
