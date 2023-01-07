@@ -42,7 +42,7 @@ final class AddBillViewController: UIViewController {
     }()
     
     private lazy var memoInputBox: SettingBoxView = {
-        let box = SettingBoxView(title: "메모", boxType: .text)
+        let box = SettingBoxView(title: "메모", boxType: .multilineText)
         return box
     }()
     
@@ -98,6 +98,7 @@ private extension AddBillViewController {
         
         memoInputBox.snp.makeConstraints {
             $0.top.equalTo(amountInputBox.snp.bottom).offset(20)
+            $0.height.equalTo(100)
             $0.leading.trailing.equalTo(titleInputBox)
         }
         

@@ -10,6 +10,7 @@ import UIKit
 
 enum BoxType {
     case text
+    case multilineText
     case number
     case date
 }
@@ -29,6 +30,14 @@ final class SettingBoxView: UIView {
         let textField = UITextField(frame: .zero)
         textField.clearButtonMode = .whileEditing
         return textField
+    }()
+    
+    private lazy var inputTextView: UITextView = {
+        let textView = UITextView(frame: .zero)
+        textView.isHidden = true
+        textView.backgroundColor = .clear
+        textView.textContainer.maximumNumberOfLines = 3
+        return textView
     }()
     
     private(set) lazy var datePickerView: UIDatePicker = {
@@ -67,6 +76,10 @@ private extension SettingBoxView {
         case .text:
             inputTextField.keyboardType = .default
             
+        case .multilineText:
+            inputTextField.isHidden = true
+            inputTextView.isHidden = false
+            
         case .number:
             inputTextField.keyboardType = .numberPad
             inputTextField.addDoneButtonOnKeyboard()
@@ -76,7 +89,7 @@ private extension SettingBoxView {
             datePickerView.isHidden = false
         }
         
-        [titleLabel, inputTextField, datePickerView].forEach { addSubview($0) }
+        [titleLabel, inputTextField, inputTextView, datePickerView].forEach { addSubview($0) }
         
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(8)
@@ -85,6 +98,13 @@ private extension SettingBoxView {
         }
         
         inputTextField.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(4)
+            $0.leading.equalTo(titleLabel)
+            $0.trailing.equalToSuperview().inset(16)
+            $0.bottom.equalToSuperview().inset(8)
+        }
+        
+        inputTextView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(4)
             $0.leading.equalTo(titleLabel)
             $0.trailing.equalToSuperview().inset(16)
