@@ -15,7 +15,7 @@ protocol BillInfoHeaderDelegate {
 }
 
 final class BillInfoCollectionHeaderView: UICollectionReusableView {
-    static let identifier = "BillInfoHeaderView"
+    static let identifier = String(describing: BillInfoCollectionHeaderView.self)
     var delegate: BillInfoHeaderDelegate?
     
     private lazy var goalButton: UIButton = {
