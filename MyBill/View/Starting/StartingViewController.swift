@@ -72,7 +72,8 @@ private extension StartingViewController {
     func setupView() {
         view.backgroundColor = .white
         
-        [welcomTitleLabel, welcomeLabel, nameTextField, targetAmountTextField, startButton].forEach { view.addSubview($0) }
+        [welcomTitleLabel, welcomeLabel, nameTextField, targetAmountTextField, startButton]
+            .forEach { view.addSubview($0) }
         
         welcomTitleLabel.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(24)

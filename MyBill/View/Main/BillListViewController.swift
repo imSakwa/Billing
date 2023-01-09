@@ -26,8 +26,15 @@ final class BillListViewController: UIViewController {
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.delegate = presenter
         collectionView.dataSource = dataSource
-        collectionView.register(BillInfoCollectionCell.self, forCellWithReuseIdentifier: BillInfoCollectionCell.identifier)
-        collectionView.register(BillInfoCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: BillInfoCollectionHeaderView.identifier)
+        collectionView.register(
+            BillInfoCollectionCell.self,
+            forCellWithReuseIdentifier: BillInfoCollectionCell.identifier
+        )
+        collectionView.register(
+            BillInfoCollectionHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: BillInfoCollectionHeaderView.identifier
+        )
         collectionView.backgroundColor = .systemGray6
         return collectionView
     }()
@@ -76,7 +83,9 @@ extension BillListViewController: BillListProtocol {
     }
     
     func configureCollectionDataSource() {
-        dataSource = UICollectionViewDiffableDataSource(collectionView: billCollectionView) { [weak self] collectionView, indexPath, itemIdentifier -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource(
+            collectionView: billCollectionView
+        ) { [weak self] collectionView, indexPath, itemIdentifier -> UICollectionViewCell? in
             
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: BillInfoCollectionCell.identifier,
@@ -170,7 +179,9 @@ private extension BillListViewController {
         let billObject = realm.objects(BillObject.self)
         
         for bill in billObject {
-            billList.append(Bill(title: bill.title, amount: bill.amount, memo: bill.memo, date: bill.date))
+            billList.append(
+                Bill(title: bill.title, amount: bill.amount, memo: bill.memo, date: bill.date)
+            )
         }
         configureSnapShot()
     }

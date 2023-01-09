@@ -61,7 +61,11 @@ extension BillListPresenter: UICollectionViewDelegateFlowLayout {
     }
     
     // 헤더 크기
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        referenceSizeForHeaderInSection section: Int
+    ) -> CGSize {
         let width = UIScreen.main.bounds.width - 32
         let height = UIScreen.main.bounds.height
         return CGSize(width: width, height: height / 5)

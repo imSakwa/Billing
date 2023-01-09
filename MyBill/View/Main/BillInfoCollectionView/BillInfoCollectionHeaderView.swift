@@ -37,7 +37,8 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
     
     private lazy var targetAmountLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.text = "목표액 : " + (UserDefaults.standard.value(forKey: "amount") as? String ?? "0") + "원"
+        let amountStr: String = UserDefaults.standard.value(forKey: "amount") as? String ?? "0"
+        label.text = "목표액 : \(amountStr)원"
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.textColor = .textColor
         return label
@@ -69,13 +70,15 @@ final class BillInfoCollectionHeaderView: UICollectionReusableView {
     
     func setupHeader(info: Info) {
         nameLabel.text = info.name
-        targetAmountLabel.text = "목표액 : " + (UserDefaults.standard.value(forKey: "amount") as? String ?? "0") + "원"
+        let amountStr: String = UserDefaults.standard.value(forKey: "amount") as? String ?? "0"
+        targetAmountLabel.text = "목표액 : \(amountStr)원"
     }
 }
 
 private extension BillInfoCollectionHeaderView {
     func setupLayout() {
-        [nameLabel, targetAmountLabel, conditionLabel, goalButton, addButton].forEach { addSubview($0) }
+        [nameLabel, targetAmountLabel, conditionLabel, goalButton, addButton]
+            .forEach { addSubview($0) }
         
         nameLabel.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide).offset(40)

@@ -13,7 +13,9 @@ final class CustomCollectionViewFlowLayout: UICollectionViewFlowLayout {
         return true
     }
     
-    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    override func layoutAttributesForElements(
+        in rect: CGRect
+    ) -> [UICollectionViewLayoutAttributes]? {
         
         let layoutAttributes = super.layoutAttributesForElements(in: rect)
         
@@ -25,7 +27,8 @@ final class CustomCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
         if offset.y < 0 {
             for attributes in stLayoutAttributes {
-                if let elmKind = attributes.representedElementKind, elmKind == UICollectionView.elementKindSectionHeader {
+                if let elmKind = attributes.representedElementKind,
+                   elmKind == UICollectionView.elementKindSectionHeader {
                     
                     let height = UIScreen.main.bounds.height / 5
                     let diffValue = abs(offset.y)
