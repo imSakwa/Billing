@@ -32,7 +32,7 @@ final class SettingBoxView: UIView {
         return textField
     }()
     
-    private lazy var inputTextView: UITextView = {
+    private(set) lazy var inputTextView: UITextView = {
         let textView = UITextView(frame: .zero)
         textView.isHidden = true
         textView.backgroundColor = .clear

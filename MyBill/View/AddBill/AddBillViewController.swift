@@ -27,30 +27,34 @@ final class AddBillViewController: UIViewController {
     }()
     
     private lazy var titleInputBox: SettingBoxView = {
-        let box = SettingBoxView(title: "제목", boxType: .text)
-        return box
+        return SettingBoxView(title: "제목", boxType: .text)
     }()
     
     private lazy var dateInputBox: SettingBoxView = {
-        let box = SettingBoxView(title: "날짜", boxType: .date)
-        return box
+        return SettingBoxView(title: "날짜", boxType: .date)
     }()
     
     private lazy var amountInputBox: SettingBoxView = {
-        let box = SettingBoxView(title: "금액", boxType: .number)
-        return box
+        return SettingBoxView(title: "금액", boxType: .number)
     }()
     
-    private lazy var memoInputBox: SettingBoxView = {
-        let box = SettingBoxView(title: "메모", boxType: .multilineText)
-        box.inputTextField.inputAccessoryView = enterButton
-        return box
+    private lazy var accessoryView: UIView = {
+        let width: CGFloat = UIScreen.main.bounds.width
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: width, height: 56))
+        view.backgroundColor = .white
+        return view
     }()
     
     private lazy var enterButton: CommonButtonView = {
         let button = CommonButtonView()
         button.setTitle("완료", for: .normal)
         return button
+    }()
+    
+    private lazy var memoInputBox: SettingBoxView = {
+        let box = SettingBoxView(title: "메모", boxType: .multilineText)
+        box.inputTextView.inputAccessoryView = accessoryView
+        return box
     }()
     
     init(viewModel: AddBillViewModel = AddBillViewModel()) {
@@ -120,8 +124,9 @@ private extension AddBillViewController {
         view.backgroundColor = .white
         navigationController?.setNavigationBarHidden(false, animated: true)
         
-        [titleLabel, titleInputBox, dateInputBox, amountInputBox, memoInputBox, enterButton]
+        [titleLabel, titleInputBox, dateInputBox, amountInputBox, memoInputBox]
             .forEach { view.addSubview($0) }
+        accessoryView.addSubview(enterButton)
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(16)
@@ -151,9 +156,8 @@ private extension AddBillViewController {
         }
         
         enterButton.snp.makeConstraints {
-            $0.leading.trailing.equalTo(titleInputBox)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
-            $0.height.equalTo(48)
+            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.top.bottom.equalToSuperview().inset(4)
         }
     }
     
