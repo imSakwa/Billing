@@ -43,6 +43,7 @@ final class AddBillViewController: UIViewController {
     
     private lazy var memoInputBox: SettingBoxView = {
         let box = SettingBoxView(title: "메모", boxType: .multilineText)
+        box.inputTextField.inputAccessoryView = enterButton
         return box
     }()
     
@@ -65,11 +66,15 @@ final class AddBillViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         bindViewModel()
+        addTapGesture()
+        addKeyboardNotification()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        removeKeyboardNotification()
     }
 }
 
@@ -77,6 +82,40 @@ extension AddBillViewController: UITextFieldDelegate {
 }
 
 private extension AddBillViewController {
+    
+    private func addTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func hideKeyboard(_ gesture: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
+    private func addKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func removeKeyboardNotification() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    
+    @objc func keyboardWillShow(_ sender: Notification) {
+        if let keyboardSize = (sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            view.frame.origin.y = 0
+            view.frame.origin.y -= keyboardSize.size.height
+        }
+    }
+    
+    @objc func keyboardWillHide(_ sender: Notification) {
+        view.frame.origin.y = 0
+    }
+    
     func setupView() {
         view.backgroundColor = .white
         navigationController?.setNavigationBarHidden(false, animated: true)
@@ -85,13 +124,13 @@ private extension AddBillViewController {
             .forEach { view.addSubview($0) }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(36)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(16)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(20)
         }
         
         titleInputBox.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(50)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(24)
         }
         
